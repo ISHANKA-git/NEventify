@@ -8,8 +8,8 @@ class login extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
           backgroundColor: Colors.white,
-          body: SizedBox(
-            width: double.infinity,
+          body: SingleChildScrollView(
+
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -69,19 +69,59 @@ class login extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(
-                  height: 10,
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Name',
-
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.person), // Icon on the left
-                  ),
-                ),
-                const SizedBox(
                   height: 20,
                 ),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30 ),
+                  child: TextFormField(
+                    style: TextStyle(color: Colors.grey),
+
+                    cursorColor: Colors.green,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      labelText: "E-mail",
+                      labelStyle: TextStyle(color: Colors.green),
+                      border: OutlineInputBorder(
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                      ),
+                      prefixIcon: Icon(Icons.email,
+                        color: Colors.green,),
+
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30 ),
+
+                  child: TextFormField(
+                    style: TextStyle(color: Colors.grey),
+
+                    cursorColor: Colors.green,
+                    keyboardType: TextInputType.visiblePassword,
+                    decoration: InputDecoration(
+                      labelText: "Password",
+                        labelStyle: TextStyle(color: Colors.green),
+                      border: OutlineInputBorder(
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                      ),
+
+                      prefixIcon: Icon(Icons.lock,
+                        color: Colors.green,),
+
+
+                    ),
+                  ),
+                ),
+
+
                 Text(
                   'Or Continue With',
                   style: TextStyle(
