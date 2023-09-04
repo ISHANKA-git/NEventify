@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:n_eventify/views/auth/login_signup.dart';
 import 'package:n_eventify/views/onboarding_screen.dart';
-import 'package:n_eventify/views/event_creation_page.dart
+import 'package:n_eventify/views/event_creation_page.dart';
 
 void main() {
   runApp(const MyApp());
