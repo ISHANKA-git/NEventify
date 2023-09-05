@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
 
-      home: login_SignUp(),
+      home: Login_SignUp(),
     );
 
   }

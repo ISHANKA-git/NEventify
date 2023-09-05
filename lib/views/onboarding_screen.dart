@@ -50,7 +50,7 @@ class OnBoardingScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context){return login_SignUp();},),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context){return Login_SignUp();},),);
                 },
                 style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.all(10),
