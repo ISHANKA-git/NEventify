@@ -1,139 +1,93 @@
 import 'package:flutter/material.dart';
 
-class login extends StatelessWidget {
-  const login({super.key});
+class login_SignUp extends StatelessWidget {
+  const login_SignUp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          backgroundColor: Colors.white,
-          body: SingleChildScrollView(
+    return DefaultTabController(
+        length: 2,
+        child: Scaffold(
 
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
+          body: Column(
               children: [
-                const SizedBox(
-                  height: 40,
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 60),
-                  child: Image(
-                    image: AssetImage(
-                      'assets/logo_withname.png',
-                    ),
-                    height: 150,
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        // Implement login functionality
-                      },
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        backgroundColor: Colors.white,
-                      ),
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Implement sign-up functionality
-                      },
-                      style: ElevatedButton.styleFrom(
-                          side: BorderSide.none,
-                          elevation: 0,
-                          backgroundColor: Colors.white),
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
+          // App Logo
+          Container(
+          padding: EdgeInsets.all(50.0),
+          child: Image.asset(
+            'assets/logo_withname.png', // Replace with your app logo image
+            height: 150.0, // Adjust the height as needed
+          ),
+        ),
+      // Tabs
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal : 60.0),
+        child: TabBar(
+          labelColor: Colors.blueGrey, // Text color when selected
+          unselectedLabelColor: Colors.grey,
+          labelStyle: TextStyle(fontSize: 18.0,
+          fontWeight: FontWeight.bold), // Font size for selected tab
+          unselectedLabelStyle: TextStyle(fontSize: 18.0),
+          indicatorColor: Color(0xFF00BF63), // Underline color
+          indicatorSize: TabBarIndicatorSize.label,
+          indicatorWeight: 3.0,
+          tabs: [
+            Tab(text: 'Login',),
+            Tab(text: 'Sign Up'),
+          ],
+        ),
+      ),
+      Expanded(
+        child: TabBarView(
+          children: [
+            // Login Page
+            LoginPage(),
 
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30 ),
-                  child: TextFormField(
-                    style: TextStyle(color: Colors.grey),
+            // Sign Up Page
+            SignupPage(),
+          ],
+        ),
+      ),
 
-                    cursorColor: Colors.green,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      labelText: "E-mail",
-                      labelStyle: TextStyle(color: Colors.green),
-                      border: OutlineInputBorder(
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
-                      ),
-                      prefixIcon: Icon(Icons.email,
-                        color: Colors.green,),
-
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30 ),
-
-                  child: TextFormField(
-                    style: TextStyle(color: Colors.grey),
-
-                    cursorColor: Colors.green,
-                    keyboardType: TextInputType.visiblePassword,
-                    decoration: InputDecoration(
-                      labelText: "Password",
-                        labelStyle: TextStyle(color: Colors.green),
-                      border: OutlineInputBorder(
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.green),
-                      ),
-
-                      prefixIcon: Icon(Icons.lock,
-                        color: Colors.green,),
-
-
-                    ),
-                  ),
-                ),
-
-
-                Text(
-                  'Or Continue With',
-                  style: TextStyle(
-                    fontSize: 11,
-                    wordSpacing: 4,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w700,
-                  ),
-                )
-              ],
-            ),
-          )),
+        ],
+        ),
+        ),
     );
   }
 }
+
+class LoginPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Login Page'),
+          // Add login form elements here
+        ],
+      ),
+    );
+  }
+}
+
+class SignupPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Sign Up Page'),
+          // Add sign-up form elements here
+        ],
+      ),
+    );
+  }
+}
+
+
+
+
+
+

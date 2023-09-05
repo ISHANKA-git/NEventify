@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      theme: _buildTheme(Brightness.dark),
-      home: OnBoardingScreen(),
+
+      home: login_SignUp(),
     );
 
   }
