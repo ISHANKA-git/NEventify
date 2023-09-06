@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:n_eventify/views/onboarding_screen.dart'; // Import your onboarding screen file
+import 'package:n_eventify/views/onboarding_screen.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -8,7 +8,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
-  static const splashDuration = Duration(seconds: 7); // Set the splash screen duration to 7 seconds
+  static const splashDuration = Duration(seconds: 7);
   bool isLoading = true;
 
   late AnimationController _controller;
@@ -21,12 +21,12 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     // Create a pulsating animation
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 1), // Adjust the duration as needed
+      duration: Duration(seconds: 1),
     )..repeat(reverse: true);
 
     _animation = Tween<double>(begin: 1.0, end: 1.2).animate(_controller);
 
-    // Start a timer to navigate to the onboarding screen after splashDuration
+
     Timer(splashDuration, () {
       if (mounted) {
         setState(() {
@@ -38,10 +38,10 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   }
 
   _navigateToOnboardingScreen() {
-    // After the delay, navigate to the onboarding screen.
+
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (_) => OnBoardingScreen(), // Navigate to the OnBoardingScreen.
+        builder: (_) => OnBoardingScreen(),
       ),
     );
   }
@@ -65,20 +65,20 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 200, // Adjust the width as needed
-              height: 200, // Adjust the height as needed
+              width: 200,
+              height: 200,
               child: Image.asset(
-                'assets/logo_withname.png', // Replace with your image path
+                'assets/logo_withname.png',
                 fit: BoxFit.contain,
               ),
             ),
-            SizedBox(height: 16), // Add spacing between image and effect
+            SizedBox(height: 16),
             ScaleTransition(
               scale: _animation,
               child: Container(
-                width: 100, // Adjust the width as needed
-                height: 5, // Adjust the height as needed
-                color: Color(0xff15BE77), // Your custom color
+                width: 100,
+                height: 5,
+                color: Color(0xff15BE77),
               ),
             ),
           ],
