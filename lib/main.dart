@@ -4,6 +4,7 @@ import 'package:n_eventify/views/auth/login_signup.dart';
 import 'package:n_eventify/views/onboarding_screen.dart';
 import 'package:n_eventify/views/event_creation_page.dart';
 import 'package:n_eventify/views/splash_page.dart';
+import 'package:n_eventify/views/chat_list_screen.dart';
 
 void main(){
   runApp(const MyApp());
