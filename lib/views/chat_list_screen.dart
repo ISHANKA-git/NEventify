@@ -173,3 +173,87 @@ class ChatBox extends StatelessWidget {
     );
   }
 }
+
+class ChatScreen extends StatelessWidget {
+  final String senderName;
+  final String imageUrl;
+
+  ChatScreen({required this.senderName, required this.imageUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          children: [
+            CircleAvatar(
+              backgroundImage: AssetImage(imageUrl),
+              radius: 20,
+            ),
+            SizedBox(width: 8),
+            Text(senderName),
+          ],
+        ),
+      ),
+      body: ChatInterface(),
+    );
+  }
+}
+
+class ChatInterface extends StatefulWidget {
+  @override
+  _ChatInterfaceState createState() => _ChatInterfaceState();
+}
+
+class _ChatInterfaceState extends State<ChatInterface> {
+  TextEditingController _messageController = TextEditingController();
+  List<String> _messages = [];
+
+  void _sendMessage(String message) {
+    setState(() {
+      _messages.add(message);
+    });
+    _messageController.clear();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            itemCount: _messages.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(_messages[index]),
+              );
+            },
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _messageController,
+                  decoration: InputDecoration(
+                    hintText: 'Type your message...',
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: Icon(Icons.send),
+                onPressed: () {
+                  if (_messageController.text.isNotEmpty) {
+                    _sendMessage(_messageController.text);
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
