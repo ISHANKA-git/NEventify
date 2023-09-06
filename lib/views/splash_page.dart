@@ -8,8 +8,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
-  static const splashDuration = Duration(seconds: 7);
-  bool isLoading = true;
+  static const splashDuration = Duration(seconds: 5);
 
   late AnimationController _controller;
   late Animation<double> _animation;
@@ -26,19 +25,14 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
     _animation = Tween<double>(begin: 1.0, end: 1.2).animate(_controller);
 
-
     Timer(splashDuration, () {
       if (mounted) {
-        setState(() {
-          isLoading = false;
-        });
         _navigateToOnboardingScreen();
       }
     });
   }
 
   _navigateToOnboardingScreen() {
-
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (_) => OnBoardingScreen(),
@@ -57,11 +51,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: isLoading
-            ? const CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Color(0xff15BE77)),
-        )
-            : Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
