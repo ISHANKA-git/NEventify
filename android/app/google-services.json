@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "849760453276",
+    "project_id": "neventify",
+    "storage_bucket": "neventify.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849760453276:android:4f88e9a0d2b9be687de359",
+        "android_client_info": {
+          "package_name": "com.example.n_eventify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849760453276-20mimbq9ercgk3pgelvci4pplpuah1qi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANz09-CosQ_mx1cFBpmuMUaNPUCJavVj0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849760453276-20mimbq9ercgk3pgelvci4pplpuah1qi.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "849760453276-io8g4h46neccl6psnls3smdjrc3p3ic6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.nEventify"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

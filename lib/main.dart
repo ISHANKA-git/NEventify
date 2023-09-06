@@ -5,7 +5,7 @@ import 'package:n_eventify/views/onboarding_screen.dart';
 import 'package:n_eventify/views/event_creation_page.dart';
 import 'package:n_eventify/views/splash_page.dart';
 
-void main() {
+void main(){
   runApp(const MyApp());
 }
 
