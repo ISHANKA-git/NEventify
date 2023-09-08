@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:n_eventify/views/auth/login_signup.dart';
+import 'package:n_eventify/views/login_signup.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
