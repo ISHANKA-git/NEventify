@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:n_eventify/views/bottom_navigation_bar.dart';
 import 'package:n_eventify/views/login_signup.dart';
 import 'package:n_eventify/views/home_page.dart';
 import 'package:n_eventify/views/onboarding_screen.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashPage(),
+      home: BottomNavigationWidget(),
     );
   }
 }
