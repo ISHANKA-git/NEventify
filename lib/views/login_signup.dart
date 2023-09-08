@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:n_eventify/views/home_page.dart';
 
 class Login_SignUp extends StatelessWidget {
   const Login_SignUp({super.key});
@@ -102,7 +103,7 @@ class LoginPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 36.0),
               child: ElevatedButton(
                 onPressed: () {
-                  // Handle login button press
+                  Navigator.push(context, MaterialPageRoute(builder: (context){return HomePage();},),);
                 },
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(110, 45),
