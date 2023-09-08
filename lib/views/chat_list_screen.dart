@@ -57,7 +57,7 @@ class ChatListScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ChatScreen(senderName: 'Nilakshida Silva', imageUrl: 'images/Photo Profile.png')),
+                      MaterialPageRoute(builder: (context) => ChatScreen(senderName: 'Nilakshida Silva', imageUrl: 'assets/Photo Profile.png')),
                     );
                   },
                   child: ChatBox(
@@ -70,7 +70,7 @@ class ChatListScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ChatScreen(senderName: 'Kusal Mendis', imageUrl: 'images/Photo Profile (1).png')),
+                      MaterialPageRoute(builder: (context) => ChatScreen(senderName: 'Kusal Mendis', imageUrl: 'assets/Photo Profile (1).png')),
                     );
                   },
                   child: ChatBox(
@@ -83,7 +83,7 @@ class ChatListScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ChatScreen(senderName: 'Nishad Jayalath', imageUrl: 'images/Photo Profile (2).png')),
+                      MaterialPageRoute(builder: (context) => ChatScreen(senderName: 'Nishad Jayalath', imageUrl: 'assets/Photo Profile (2).png')),
                     );
                   },
                   child: ChatBox(
