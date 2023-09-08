@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:n_eventify/views/home_page.dart';
-
 import 'bottom_navigation_bar.dart';
 
 class Login_SignUp extends StatelessWidget {
