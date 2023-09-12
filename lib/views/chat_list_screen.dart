@@ -61,7 +61,7 @@ class ChatListScreen extends StatelessWidget {
                     );
                   },
                   child: ChatBox(
-                    imageUrl: 'images/Photo Profile.png',
+                    imageUrl: 'assets/Photo Profile.png',
                     senderName: 'Nilakshida Silva',
                     lastMessage: 'Hey, how are you?',
                   ),
@@ -74,7 +74,7 @@ class ChatListScreen extends StatelessWidget {
                     );
                   },
                   child: ChatBox(
-                    imageUrl: 'images/Photo Profile (1).png',
+                    imageUrl: 'assets/Photo Profile (1).png',
                     senderName: 'Kusal Mendis',
                     lastMessage: 'Sure thing!',
                   ),
@@ -87,7 +87,7 @@ class ChatListScreen extends StatelessWidget {
                     );
                   },
                   child: ChatBox(
-                    imageUrl: 'images/Photo Profile (2).png',
+                    imageUrl: 'assets/Photo Profile (2).png',
                     senderName: 'Nishad Jayalath',
                     lastMessage: 'Good morning!',
                   ),
