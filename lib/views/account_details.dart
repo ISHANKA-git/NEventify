@@ -1,19 +1,32 @@
 import 'package:flutter/material.dart';
 
-
-
 class AccountDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.green,
-          title: const Text('Account Details'),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Color(0xFFC8E6C9), // Green background color for the icon
+                shape: BoxShape.circle, // Rounded shape
+              ),
+              child: IconButton(
+                icon: Icon(Icons.arrow_back_ios_sharp, color: Color(0xFF00BF63)),
+                onPressed: () {
+                  Navigator.of(context).pop(); // Navigate back to previous page
+                },
+              ),
+            ),
+          ),
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.only(left: 30, right: 30),
             child: Container(
               height: MediaQuery.of(context).size.height,
               child: Column(
@@ -66,7 +79,9 @@ class AccountDetailScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(width: 20,),
+                      SizedBox(
+                        width: 20,
+                      ),
                       const Text('Male'),
                       Radio(value: 'Male', groupValue: null, onChanged: null),
                       SizedBox(width: 50.0),
@@ -81,11 +96,19 @@ class AccountDetailScreen extends StatelessWidget {
                         // Add your navigation logic here
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
+                        fixedSize: const Size(110, 45),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        primary: Color(0xFF00BF63),
                       ),
-                      child: const Text('Next'),
+                      child: const Text(
+                        'Next',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
