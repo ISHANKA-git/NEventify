@@ -93,7 +93,8 @@ class AccountDetailScreen extends StatelessWidget {
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
-                        // Add your navigation logic here
+                        Navigator.push(context, MaterialPageRoute(builder: (context){return UploadPhoto();},),);
+
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize: const Size(110, 45),
@@ -118,3 +119,35 @@ class AccountDetailScreen extends StatelessWidget {
     );
   }
 }
+
+class UploadPhoto extends StatelessWidget {
+  const UploadPhoto({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+      appBar: AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      leading: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Color(0xFFC8E6C9), // Green background color for the icon
+            shape: BoxShape.circle, // Rounded shape
+          ),
+          child: IconButton(
+            icon: Icon(Icons.arrow_back_ios_sharp, color: Color(0xFF00BF63)),
+            onPressed: () {
+              Navigator.of(context).pop(); // Navigate back to previous page
+            },
+          ),
+        ),
+      ),
+    ),
+      )
+    );
+  }
+}
+
