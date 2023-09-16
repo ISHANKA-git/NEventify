@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:n_eventify/views/popular_events.dart';
+import 'package:n_eventify/views/upcoming_events.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -179,11 +181,21 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(
                         width: screenwidth * .35,
                       ),
-                      const Text(
-                        'View More',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.green,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const UpcomingEvents(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'View More',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.green,
+                          ),
                         ),
                       ),
                     ],
@@ -262,11 +274,21 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(
                         width: screenwidth * .405,
                       ),
-                      const Text(
-                        'View More',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.green,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const PopularEvents(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'View More',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.green,
+                          ),
                         ),
                       ),
                     ],
