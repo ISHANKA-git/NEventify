@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:n_eventify/controller/auth.dart';
 import 'package:n_eventify/views/account_details.dart';
 import 'bottom_navigation_bar.dart';
 
@@ -59,7 +60,13 @@ class Login_SignUp extends StatelessWidget {
   }
 }
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final AuthServices _auth = AuthServices();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -104,12 +111,7 @@ class LoginPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 36.0),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) {
-                      return BottomNavigationWidget();
-                    }),
-                  );
+
                 },
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(110, 45),
@@ -129,8 +131,15 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 16.0), // Add spacing between buttons and text
             // Login as Guest Button
             TextButton(
-              onPressed: () {
-
+              onPressed: () async{
+                dynamic result = await _auth.signInAnonymously();
+                if(result == null){
+                  print("Error in Sign in Anonymously");
+                }
+                else{
+                  print("Signed in Anonymously");
+                  print(result.uid);
+                }
               },
               child: Text(
                 'Login as Guest',
