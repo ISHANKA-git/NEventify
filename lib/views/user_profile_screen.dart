@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:n_eventify/controller/auth.dart';
 
 
 class UserProfileScreen extends StatefulWidget {
-  const UserProfileScreen({Key? key}) : super(key: key);
+  UserProfileScreen({Key? key}) : super(key: key);
 
+  final AuthServices _auth = AuthServices();
   @override
   _UserProfileScreenState createState() => _UserProfileScreenState();
 }
@@ -56,12 +58,17 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       }
     });
   }
-
+  final AuthServices _auth = AuthServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        actions: [
+          ElevatedButton(onPressed: () async {
+            await _auth.signOut();
+          }, child: Icon(Icons.logout),)
+        ],
         title: Row(
           children: [
             Container(
