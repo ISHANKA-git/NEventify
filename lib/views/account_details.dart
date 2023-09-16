@@ -167,7 +167,7 @@ class UploadPhoto extends StatelessWidget {
           'This data will be displayed in your acccount profile for security',
           style: TextStyle(fontSize: 16),
         ),
-          SizedBox(height: 30),
+          SizedBox(height: 60),
         Center(
           child: Stack(
             alignment: Alignment.topRight,
@@ -176,7 +176,7 @@ class UploadPhoto extends StatelessWidget {
                 width: 150, // Adjust the size of the profile photo container
                 height: 150, // Adjust the size of the profile photo container
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
+                  shape: BoxShape.rectangle,
                   border: Border.all(
                     color: Color(0xFF00BF63),
                     width: 2,
@@ -207,7 +207,7 @@ class UploadPhoto extends StatelessWidget {
             ],
           ),
         ),
-          const SizedBox(height: 20.0),
+          const SizedBox(height: 150.0),
           Center(
             child: ElevatedButton(
               onPressed: () {
