@@ -135,6 +135,8 @@ class _LoginPageState extends State<LoginPage> {
             // Login as Guest Button
             TextButton(
               onPressed: () async{
+                Navigator.push(context, MaterialPageRoute(builder: (context){return BottomNavigationWidget();},),);
+
                 dynamic result = await _auth.signInAnonymously();
                 if(result == null){
                   print("Error in Sign in Anonymously");

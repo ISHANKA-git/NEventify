@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:n_eventify/controller/auth.dart';
+import 'package:n_eventify/views/login_signup.dart';
 
 
 class UserProfileScreen extends StatefulWidget {
@@ -66,6 +67,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         backgroundColor: Colors.white,
         actions: [
           ElevatedButton(onPressed: () async {
+            Navigator.push(context, MaterialPageRoute(builder: (context){return Login_SignUp();},),);
+
             await _auth.signOut();
           }, child: Icon(Icons.logout),)
         ],
