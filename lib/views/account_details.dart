@@ -121,8 +121,6 @@ class AccountDetailScreen extends StatelessWidget {
 }
 
 class UploadPhoto extends StatelessWidget {
-  const UploadPhoto({super.key});
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -164,15 +162,75 @@ class UploadPhoto extends StatelessWidget {
             fontSize: 30,
           ),
         ),
-        const SizedBox(height: 15),
+          SizedBox(height: 15),
         Text(
           'This data will be displayed in your acccount profile for security',
           style: TextStyle(fontSize: 16),
         ),
-        ]
+          SizedBox(height: 30),
+        Center(
+          child: Stack(
+            alignment: Alignment.topRight,
+            children: [
+              Container(
+                width: 150, // Adjust the size of the profile photo container
+                height: 150, // Adjust the size of the profile photo container
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Color(0xFF00BF63),
+                    width: 2,
+                  ),
+                ),
+                child: CircleAvatar(
+                  // Your profile photo widget goes here
+                  backgroundImage: NetworkImage('your_profile_image_url'),
+                  // You can use AssetImage or FileImage based on your needs
+                ),
+              ),
+              Positioned(
+                top: 0,
+                right: 0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                    icon: Icon(Icons.clear),
+                    onPressed: () {
+                      // Implement the logic to remove the profile photo here
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+          const SizedBox(height: 20.0),
+          Center(
+            child: ElevatedButton(
+              onPressed: () {
+                // Implement the logic to navigate to the next screen or perform an action.
+              },
+              style: ElevatedButton.styleFrom(
+                fixedSize: const Size(110, 45),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                primary: Color(0xFF00BF63),
+              ),
+              child: const Text(
+                'Next',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          )
+          ],
       ),
-    ),
-    ),
+          ),
+          ),
       ),
     ),
     );
