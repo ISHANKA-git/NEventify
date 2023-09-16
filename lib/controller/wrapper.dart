@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:n_eventify/views/bottom_navigation_bar.dart';
 import 'package:n_eventify/views/splash_page.dart';
+import 'package:provider/provider.dart';
 
+import '../model/user_model.dart';
 import 'authentication.dart';
 
-class Wrapper extends StatefulWidget {
+class Wrapper extends StatelessWidget {
   const Wrapper({super.key});
 
   @override
-  State<Wrapper> createState() => _WrapperState();
-}
-
-class _WrapperState extends State<Wrapper> {
-  @override
   Widget build(BuildContext context) {
-    return SplashPage();
+    final user = Provider.of<UserModel?>(context);
+    if (user == null) {
+      return Authentication();
+    }
+    else {
+      return BottomNavigationWidget();
+    }
   }
 }
