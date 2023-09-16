@@ -104,30 +104,49 @@ class LoginPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 36.0),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context){return BottomNavigationWidget();},),);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return BottomNavigationWidget();
+                    }),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   fixedSize: const Size(110, 45),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)),
-
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                   primary: Color(0xFF00BF63),
                 ),
-                child: Text('Login',
-                style: TextStyle(
-                  fontSize: 16,
-                ),),
+                child: Text(
+                  'Login',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
               ),
             ),
-            // Login Button
+            SizedBox(height: 16.0), // Add spacing between buttons and text
+            // Login as Guest Button
+            TextButton(
+              onPressed: () {
 
-            // Add login form elements here
+              },
+              child: Text(
+                'Login as Guest',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.green,
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 }
+
 
 class SignupPage extends StatelessWidget {
   @override

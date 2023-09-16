@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:n_eventify/controller/wrapper.dart';
 import 'package:n_eventify/views/login_signup.dart';
 
 class OnBoardingScreen extends StatelessWidget {
@@ -50,7 +51,7 @@ class OnBoardingScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context){return Login_SignUp();},),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context){return Wrapper();},),);
                 },
                 style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.all(10),
