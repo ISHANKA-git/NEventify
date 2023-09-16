@@ -146,8 +146,35 @@ class UploadPhoto extends StatelessWidget {
         ),
       ),
     ),
-      )
+          body: SingleChildScrollView(
+          child: Padding(
+          padding: const EdgeInsets.only(left: 30, right: 30),
+      child: Container(
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          SizedBox(
+          height: 30,
+        ),
+        Text(
+          'Upload your photo profile',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+          ),
+        ),
+        const SizedBox(height: 15),
+        Text(
+          'This data will be displayed in your acccount profile for security',
+          style: TextStyle(fontSize: 16),
+        ),
+        ]
+      ),
+    ),
+    ),
+      ),
+    ),
     );
   }
 }
-
