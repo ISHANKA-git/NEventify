@@ -226,7 +226,7 @@ class _HomePageState extends State<HomePage> {
                                             const UpcomingEvents()),
                                   );
                                 },
-                                child: Text(
+                                child: const Text(
                                   "View More",
                                   style: TextStyle(
                                       fontSize: 12, color: Colors.green),
@@ -324,7 +324,7 @@ class _HomePageState extends State<HomePage> {
                                             const PopularEvents()),
                                   );
                                 },
-                                child: Text(
+                                child: const Text(
                                   "View More",
                                   style: TextStyle(
                                       fontSize: 12, color: Colors.green),
@@ -347,7 +347,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         SizedBox(
                           width: screenwidth * .3,
-                          child: Column(
+                          child: const Column(
                             children: [
                               Text(
                                 "Green Noodle",
