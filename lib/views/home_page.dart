@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:n_eventify/views/popular_events.dart';
+import 'package:n_eventify/views/upcoming_events.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -213,12 +215,21 @@ class _HomePageState extends State<HomePage> {
                         ),
                         SizedBox(
                           width: screenwidth * .45,
-                          child: const Align(
+                          child: Align(
                               alignment: Alignment.centerRight,
-                              child: Text(
-                                "View More",
-                                style: TextStyle(
-                                  fontSize: 12,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const UpcomingEvents()),
+                                  );
+                                },
+                                child: Text(
+                                  "View More",
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.green),
                                 ),
                               )),
                         ),
@@ -302,12 +313,21 @@ class _HomePageState extends State<HomePage> {
                         ),
                         SizedBox(
                           width: screenwidth * .45,
-                          child: const Align(
+                          child: Align(
                               alignment: Alignment.centerRight,
-                              child: Text(
-                                "View More",
-                                style: TextStyle(
-                                  fontSize: 12,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const PopularEvents()),
+                                  );
+                                },
+                                child: Text(
+                                  "View More",
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.green),
                                 ),
                               )),
                         ),
