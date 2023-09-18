@@ -47,7 +47,8 @@ class _HomePageState extends State<HomePage> {
                                 child: Text(
                                   "What's Going\non Today",
                                   style: TextStyle(
-                                      fontSize: 24, fontWeight: FontWeight.bold),
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),
@@ -88,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor:
-                                  const Color.fromARGB(255, 226, 245, 225),
+                                      const Color.fromARGB(255, 226, 245, 225),
                                   hintText: 'what do you want to discover',
                                   hintStyle: const TextStyle(fontSize: 12),
                                   prefixIcon: IconButton(
@@ -101,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide:
-                                    const BorderSide(color: Colors.white),
+                                        const BorderSide(color: Colors.white),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                 ),
@@ -111,7 +112,8 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               width: screenwidth * .2,
                               height: 50,
-                              child: Image.asset("assets/homePage/filtericon.png"),
+                              child:
+                                  Image.asset("assets/homePage/filtericon.png"),
                             ),
                           ],
                         ),
@@ -179,7 +181,8 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.only(bottom: 4, top: 4),
+                                      padding:
+                                          EdgeInsets.only(bottom: 4, top: 4),
                                       child: Align(
                                         alignment: Alignment.bottomLeft,
                                         child: Text(
@@ -190,9 +193,12 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       ),
                                     ),
-                                    Text(
-                                      "Join us in celebrating the momentous\noccasion of the NSBM Department of\nComputer Science and Software\nEngineering's Circle grand inauguration!",
-                                      style: TextStyle(fontSize: 10),
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "Join us in celebrating the momentous\noccasion of the NSBM Department of\nComputer Science and Software\nEngineering's Circle grand inauguration!",
+                                        style: TextStyle(fontSize: 10),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -215,7 +221,8 @@ class _HomePageState extends State<HomePage> {
                                 child: Text(
                                   "Upcoming Events",
                                   style: TextStyle(
-                                      fontSize: 14, fontWeight: FontWeight.bold),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),
@@ -229,7 +236,7 @@ class _HomePageState extends State<HomePage> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                            const UpcomingEvents()),
+                                                const UpcomingEvents()),
                                       );
                                     },
                                     child: const Text(
@@ -266,7 +273,8 @@ class _HomePageState extends State<HomePage> {
                                   const Text(
                                     "27 July 2023",
                                     style: TextStyle(
-                                        fontSize: 12, fontWeight: FontWeight.w200),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w200),
                                   ),
                                 ],
                               ),
@@ -291,7 +299,8 @@ class _HomePageState extends State<HomePage> {
                                   const Text(
                                     "Coming Soon",
                                     style: TextStyle(
-                                        fontSize: 12, fontWeight: FontWeight.w200),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w200),
                                   ),
                                 ],
                               ),
@@ -313,7 +322,8 @@ class _HomePageState extends State<HomePage> {
                                 child: Text(
                                   "Popular Events",
                                   style: TextStyle(
-                                      fontSize: 14, fontWeight: FontWeight.bold),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),
@@ -327,7 +337,7 @@ class _HomePageState extends State<HomePage> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                            const PopularEvents()),
+                                                const PopularEvents()),
                                       );
                                     },
                                     child: const Text(
@@ -358,7 +368,8 @@ class _HomePageState extends State<HomePage> {
                                   Text(
                                     "Green Noodle",
                                     style: TextStyle(
-                                        fontSize: 12, fontWeight: FontWeight.w600),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600),
                                   ),
                                   SizedBox(
                                     height: 5,
@@ -366,7 +377,8 @@ class _HomePageState extends State<HomePage> {
                                   Text(
                                     "07 May 2023",
                                     style: TextStyle(
-                                        fontSize: 12, fontWeight: FontWeight.w200),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w200),
                                   ),
                                 ],
                               ),

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:n_eventify/controller/wrapper.dart';
 import 'package:n_eventify/views/onboarding_screen.dart';
 
 class SplashPage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   _navigateToOnboardingScreen() {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (_) => OnBoardingScreen(),
+        builder: (_) => Wrapper(),
       ),
     );
   }
