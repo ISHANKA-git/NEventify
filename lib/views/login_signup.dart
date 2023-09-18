@@ -314,6 +314,10 @@ class _SignupPageState extends State<SignupPage> {
                         error = "Please Enter a valid E-mail !";
                       });
                     }
+<<<<<<< HEAD
+=======
+                    Navigator.push(context, MaterialPageRoute(builder: (context){return AccountDetailScreen();},),);
+>>>>>>> parent of 5f0f08b (Issue fixed on home page)
 
                   },
                   style: ElevatedButton.styleFrom(
