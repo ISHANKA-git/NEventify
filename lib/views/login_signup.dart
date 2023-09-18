@@ -16,10 +16,10 @@ class Login_SignUp extends StatelessWidget {
           children: [
             // App Logo
             Container(
-              padding: EdgeInsets.all(50.0),
+              padding: EdgeInsets.all(40.0),
               child: Image.asset(
                 'assets/logo_withname.png', // Replace with your app logo image
-                height: 150.0, // Adjust the height as needed
+                height: 120.0, // Adjust the height as needed
               ),
             ),
             // Tabs
@@ -67,94 +67,131 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  // ref for the auth services class
   final AuthServices _auth = AuthServices();
+  // form key
+  final _formKey = GlobalKey<FormState>();
+  //e mail password state
+  String email = "";
+  String password = "";
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 46.0),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 46.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  labelStyle: TextStyle(
-                    fontSize: 14.0,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 40.0),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 46.0),
+                child: TextFormField(
+                  validator: (val) =>
+                    val?.isEmpty == true ? "Enter a valid email" : null,
+                  onChanged: (val){
+                    setState(() {
+                      email = val;
+                    });
+                  },
+
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    labelStyle: TextStyle(
+                      fontSize: 14.0,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 26.0), // Add spacing
-            // Password Input Field
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 46.0),
-              child: TextFormField(
-                obscureText: true, // Hide password
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  labelStyle: TextStyle(
-                    fontSize: 14.0,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 56.0),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 36.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context){return BottomNavigationWidget();},),);
-
-
-                },
-                style: ElevatedButton.styleFrom(
-                  fixedSize: const Size(110, 45),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  primary: Color(0xFF00BF63),
-                ),
-                child: Text(
-                  'Login',
-                  style: TextStyle(
-                    fontSize: 16,
+              SizedBox(height: 26.0), // Add spacing
+              // Password Input Field
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 46.0),
+                child: TextFormField(
+                  validator: (val) =>
+                  val!.length < 6 ? "Enter a valid password" : null,
+                  onChanged: (val){
+                    setState(() {
+                      password = val;
+                    });
+                  },
+                  obscureText: true, // Hide password
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    labelStyle: TextStyle(
+                      fontSize: 14.0,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 16.0), // Add spacing between buttons and text
-            // Login as Guest Button
-            TextButton(
-              onPressed: () async{
-                Navigator.push(context, MaterialPageRoute(builder: (context){return BottomNavigationWidget();},),);
+              SizedBox(height: 36.0),
 
-                dynamic result = await _auth.signInAnonymously();
-                if(result == null){
-                  print("Error in Sign in Anonymously");
-                }
-                else{
-                  print("Signed in Anonymously");
-                  print(result.uid);
-                }
-              },
-              child: Text(
-                'Login as Guest',
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 36.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context){return BottomNavigationWidget();},),);
+
+
+                  },
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(110, 45),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    primary: Color(0xFF00BF63),
+                  ),
+                  child: Text(
+                    'Login',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 26.0),
+              
+              Text("Login with Social Accounts",
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.green,
+                  color: Colors.blueGrey[600],),
+              ),
+              SizedBox(height: 16.0),
+              Image.asset(
+                'assets/google-icon 1.png', // Replace with your app logo image
+                height: 30.0, // Adjust the height as needed
+              ),
+              SizedBox(height: 16.0),
+              // Login as Guest Button
+              TextButton(
+                onPressed: () async{
+                  Navigator.push(context, MaterialPageRoute(builder: (context){return BottomNavigationWidget();},),);
+
+                  dynamic result = await _auth.signInAnonymously();
+                  if(result == null){
+                    print("Error in Sign in Anonymously");
+                  }
+                  else{
+                    print("Signed in Anonymously");
+                    print(result.uid);
+                  }
+                },
+                child: Text(
+                  'Login as Guest',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.green,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
