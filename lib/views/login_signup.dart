@@ -216,6 +216,7 @@ class _SignupPageState extends State<SignupPage> {
   String email = "";
   String name = "";
   String password = "";
+  String error = "";
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -294,7 +295,13 @@ class _SignupPageState extends State<SignupPage> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 36.0),
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                    if(result == null){
+                      setState(() {
+                        error = "Please Enter a valid E-mail !";
+                      });
+                    }
                     Navigator.push(context, MaterialPageRoute(builder: (context){return AccountDetailScreen();},),);
 
                   },
@@ -311,9 +318,10 @@ class _SignupPageState extends State<SignupPage> {
                     ),),
                 ),
               ),
-              // Login Button
-
-              // Add login form elements here
+              Text(error,
+              style: TextStyle(
+                color: Colors.red,
+              ),)
             ],
           ),
         ),
