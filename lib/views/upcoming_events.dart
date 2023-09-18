@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:n_eventify/views/bottom_navigation_bar.dart';
 
 import 'package:n_eventify/views/home_page.dart';
 
@@ -35,7 +36,7 @@ class _UpcomingEventState extends State<UpcomingEvents> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const HomePage(),
+                            builder: (context) =>  BottomNavigationWidget(),
                           ),
                         );
                       },
