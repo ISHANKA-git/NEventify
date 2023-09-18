@@ -164,9 +164,12 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.blueGrey[600],),
               ),
               SizedBox(height: 16.0),
-              Image.asset(
-                'assets/google-icon 1.png', // Replace with your app logo image
-                height: 30.0, // Adjust the height as needed
+              GestureDetector(
+                onTap:(){} ,
+                child: Image.asset(
+                  'assets/google-icon 1.png', // Replace with your app logo image
+                  height: 30.0, // Adjust the height as needed
+                ),
               ),
               SizedBox(height: 16.0),
               // Login as Guest Button
@@ -200,86 +203,119 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends StatefulWidget {
+  @override
+  State<SignupPage> createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+  final AuthServices _auth = AuthServices();
+  // form key
+  final _formKey = GlobalKey<FormState>();
+  //e mail password state
+  String email = "";
+  String name = "";
+  String password = "";
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 36.0),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 46.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  labelStyle: TextStyle(
-                    fontSize: 14.0,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 16.0),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 46.0),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Name',
-                  labelStyle: TextStyle(
-                    fontSize: 14.0,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
+        child: Form(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 36.0),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 46.0),
+                child: TextFormField(
+                  validator: (val) =>
+                  val?.isEmpty == true ? "Enter a valid email" : null,
+                  onChanged: (val){
+                    setState(() {
+                      email = val;
+                    });
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    labelStyle: TextStyle(
+                      fontSize: 14.0,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 16.0),// Add spacing
-            // Password Input Field
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 46.0),
-              child: TextFormField(
-                obscureText: true, // Hide password
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  labelStyle: TextStyle(
-                    fontSize: 14.0,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
+              SizedBox(height: 16.0),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 46.0),
+                child: TextFormField(
+                  onChanged: (val){
+                    setState(() {
+                      name = val;
+                    });
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                    labelStyle: TextStyle(
+                      fontSize: 14.0,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 36.0),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 36.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context){return AccountDetailScreen();},),);
+              SizedBox(height: 16.0),// Add spacing
+              // Password Input Field
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 46.0),
+                child: TextFormField(
+                  validator: (val) =>
+                  val!.length < 6 ? "Enter a valid password" : null,
+                  onChanged: (val){
+                    setState(() {
+                      password = val;
+                    });
+                  },
+                  obscureText: true, // Hide password
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    labelStyle: TextStyle(
+                      fontSize: 14.0,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 36.0),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 36.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context){return AccountDetailScreen();},),);
 
-                },
-                style: ElevatedButton.styleFrom(
-                  fixedSize: const Size(150, 45),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)),
+                  },
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(150, 45),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
 
-                  primary: Color(0xFF00BF63),
+                    primary: Color(0xFF00BF63),
+                  ),
+                  child: Text('Create Account',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),),
                 ),
-                child: Text('Create Account',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),),
               ),
-            ),
-            // Login Button
+              // Login Button
 
-            // Add login form elements here
-          ],
+              // Add login form elements here
+            ],
+          ),
         ),
       ),
     );
