@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:n_eventify/views/popular_events.dart';
 import 'package:n_eventify/views/upcoming_events.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -11,6 +12,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
+
+  Stream<QuerySnapshot> getEventsStream() {
+    // Replace 'events' with the name of your Firestore collection
+    return FirebaseFirestore.instance.collection('events').snapshots();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,6 @@ class _HomePageState extends State<HomePage> {
             flex: 1,
             child: Container(),
           ),
-          // Wrap the SingleChildScrollView with a Flex widget
           Flex(
             direction: Axis.vertical,
             children: [
@@ -31,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                 child: SizedBox(
                   width: screenwidth * .9,
                   child: SingleChildScrollView(
-                    physics: BouncingScrollPhysics(), // Add this line
+                    physics: BouncingScrollPhysics(),
                     child: Column(
                       children: [
                         const SizedBox(
@@ -47,8 +52,9 @@ class _HomePageState extends State<HomePage> {
                                 child: Text(
                                   "What's Going\non Today",
                                   style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold),
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
@@ -89,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor:
-                                      const Color.fromARGB(255, 226, 245, 225),
+                                  const Color.fromARGB(255, 226, 245, 225),
                                   hintText: 'what do you want to discover',
                                   hintStyle: const TextStyle(fontSize: 12),
                                   prefixIcon: IconButton(
@@ -102,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide:
-                                        const BorderSide(color: Colors.white),
+                                    const BorderSide(color: Colors.white),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                 ),
@@ -113,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                               width: screenwidth * .2,
                               height: 50,
                               child:
-                                  Image.asset("assets/homePage/filtericon.png"),
+                              Image.asset("assets/homePage/filtericon.png"),
                             ),
                           ],
                         ),
@@ -182,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     Padding(
                                       padding:
-                                          EdgeInsets.only(bottom: 4, top: 4),
+                                      EdgeInsets.only(bottom: 4, top: 4),
                                       child: Align(
                                         alignment: Alignment.bottomLeft,
                                         child: Text(
@@ -236,7 +242,7 @@ class _HomePageState extends State<HomePage> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const UpcomingEvents()),
+                                            const UpcomingEvents()),
                                       );
                                     },
                                     child: const Text(
@@ -337,7 +343,7 @@ class _HomePageState extends State<HomePage> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const PopularEvents()),
+                                            const PopularEvents()),
                                       );
                                     },
                                     child: const Text(
@@ -352,39 +358,34 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(
                           height: 30,
                         ),
-                        Row(
-                          children: [
-                            Container(
-                              width: screenwidth * .05,
-                            ),
-                            SizedBox(
-                              width: screenwidth * .3,
-                              child: Image.asset("assets/homePage/greenn.png"),
-                            ),
-                            SizedBox(
-                              width: screenwidth * .3,
-                              child: const Column(
-                                children: [
-                                  Text(
-                                    "Green Noodle",
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    "07 May 2023",
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w200),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        )
+
+                        // Add the StreamBuilder here
+                        StreamBuilder<QuerySnapshot>(
+                          stream: getEventsStream(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return CircularProgressIndicator();
+                            }
+                            if (snapshot.hasError) {
+                              return Text('Error: ${snapshot.error}');
+                            }
+                            if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                              return Text('No events available.');
+                            }
+
+                            // Display Firestore data here
+                            return Column(
+                              children: snapshot.data!.docs.map((eventDoc) {
+                                Map<String, dynamic> eventData = eventDoc.data() as Map<String, dynamic>;
+                                return ListTile(
+                                  title: Text(eventData['eventName']),
+                                  subtitle: Text(eventData['date']),
+                                  // Add more widgets for other event data
+                                );
+                              }).toList(),
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ),
