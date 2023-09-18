@@ -168,46 +168,65 @@ class photoprofile extends StatelessWidget {
     style: TextStyle(fontSize: 16),
     ),
           const SizedBox(height: 80.0),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                // Implement the function to select an image from the gallery here
-              },
-              style: ElevatedButton.styleFrom(
-                fixedSize: const Size(110, 45),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
-                primary: Color(0xFF00BF63),
-              ),
-              child: const Text(
-                'From Gallery',
+      Center(
+        child: ElevatedButton(
+          onPressed: () {
+            // Implement the function to select an image from the gallery here
+          },
+          style: ElevatedButton.styleFrom(
+            fixedSize: const Size(170, 45),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            primary: Colors.white,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.photo_library, size: 30,color: Colors.greenAccent,), // Add the icon here
+              SizedBox(width: 10),
+              Text(
+                'From Gallery', // Add the text here
                 style: TextStyle(
                   fontSize: 16,
+                  color: Colors.black
                 ),
               ),
-            ),
+            ],
           ),
-          SizedBox(height: 100),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                // Implement the function to take a photo here
-              },
-              style: ElevatedButton.styleFrom(
-                fixedSize: const Size(110, 45),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
-                primary: Color(0xFF00BF63),
-              ),
-              child: const Text(
-                'Take Photo',
+        ),
+      ),
+
+      SizedBox(height: 100),
+      Center(
+        child: ElevatedButton(
+          onPressed: () {
+            // Implement the function to take a photo here
+          },
+          style: ElevatedButton.styleFrom(
+            fixedSize: const Size(170, 45),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            primary: Colors.white,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.camera, size: 30,color: Colors.pink,), // Add the icon here
+              SizedBox(width: 10),
+              Text(
+                'Take Photo', // Add the text here
                 style: TextStyle(
                   fontSize: 16,
+                    color: Colors.black
                 ),
               ),
-            ),
+            ],
           ),
-    SizedBox(height: 140.0),
+        ),
+      ),
+      SizedBox(height: 140.0),
     Center(
     child: ElevatedButton(
     onPressed: () {
@@ -230,27 +249,13 @@ class photoprofile extends StatelessWidget {
     ),
           ],
         ),
+                ),
+        ),
         ),
     ),
-    ),
-        ),
-    );
+        );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 class UploadPhoto extends StatelessWidget {
