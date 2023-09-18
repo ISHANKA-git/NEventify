@@ -74,6 +74,7 @@ class _LoginPageState extends State<LoginPage> {
   //e mail password state
   String email = "";
   String password = "";
+  String error ="";
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -132,11 +133,23 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 36.0),
 
+              Text(error,
+              style: TextStyle(
+                color: Colors.red,
+              ),),
+
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 36.0),
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context){return BottomNavigationWidget();},),);
+                  onPressed: () async {
+                    dynamic result = _auth.signInUsingEmailAndPassword(email, password);
+                    if(result == null){
+                      setState(() {
+                        error = "Coudn't signin with those credentials";
+                      });
+                    }
+
+
 
 
                   },
