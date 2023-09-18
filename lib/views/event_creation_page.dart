@@ -108,7 +108,7 @@ class _EventCreationPageState extends State<EventCreationPage> {
               key: _formKey,
               child: Column(
                 children: [
-                  SizedBox(height: 30),
+
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
