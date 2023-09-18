@@ -167,8 +167,47 @@ class photoprofile extends StatelessWidget {
     'This data will be displayed in your acccount profile for security',
     style: TextStyle(fontSize: 16),
     ),
-
-    const SizedBox(height: 20.0),
+          const SizedBox(height: 80.0),
+          Center(
+            child: ElevatedButton(
+              onPressed: () {
+                // Implement the function to select an image from the gallery here
+              },
+              style: ElevatedButton.styleFrom(
+                fixedSize: const Size(110, 45),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                primary: Color(0xFF00BF63),
+              ),
+              child: const Text(
+                'From Gallery',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 100),
+          Center(
+            child: ElevatedButton(
+              onPressed: () {
+                // Implement the function to take a photo here
+              },
+              style: ElevatedButton.styleFrom(
+                fixedSize: const Size(110, 45),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                primary: Color(0xFF00BF63),
+              ),
+              child: const Text(
+                'Take Photo',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ),
+    SizedBox(height: 140.0),
     Center(
     child: ElevatedButton(
     onPressed: () {
@@ -189,14 +228,14 @@ class photoprofile extends StatelessWidget {
     ),
     ),
     ),
-    ],
+          ],
+        ),
+        ),
     ),
     ),
-    ),
-    ),
-    ),
+        ),
     );
-    }
+  }
 }
 
 
