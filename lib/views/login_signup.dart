@@ -157,9 +157,10 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 26.0),
               
-              Text("Login with Social Accounts",
+              Text("Or Continue With",
                 style: TextStyle(
                   fontSize: 12,
+                  fontWeight: FontWeight.bold,
                   color: Colors.blueGrey[600],),
               ),
               SizedBox(height: 16.0),
