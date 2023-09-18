@@ -149,9 +149,6 @@ class _LoginPageState extends State<LoginPage> {
                       });
                     }
 
-
-
-
                   },
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(110, 45),
@@ -186,9 +183,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 16.0),
               // Login as Guest Button
-              TextButton(
-                onPressed: () async{
-                  Navigator.push(context, MaterialPageRoute(builder: (context){return BottomNavigationWidget();},),);
+              GestureDetector(
+                onTap: () async{
+
 
                   dynamic result = await _auth.signInAnonymously();
                   if(result == null){

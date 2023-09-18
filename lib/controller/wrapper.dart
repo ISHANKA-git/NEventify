@@ -13,7 +13,7 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<UserModel?>(context);
     if (user == null) {
-      return SplashPage();
+      return Authentication();
     }
     else {
       return BottomNavigationWidget();
