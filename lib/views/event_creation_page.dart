@@ -269,23 +269,33 @@ borderRadius: BorderRadius.circular(8),
 border: Border.all(color: Colors.grey),
 ),
 child: TextFormField(
-controller: _dateController,
-decoration: InputDecoration(
-labelText: 'Date',
-  icon: Padding(
-    padding: EdgeInsets.only(left: 10),
-child: Icon(Icons.calendar_today, color: Color(0xFF00BF63)),
+  controller: _dateController,
+  decoration: InputDecoration(
+    labelText: 'Date',
+    icon: Icon(Icons.calendar_today, color: Color(0xFF00BF63)),
   ),
-border: InputBorder.none,
-  contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+  readOnly: true, // Prevent manual input
+  onTap: () async {
+    final selectedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(DateTime.now().year + 1),
+    );
+    if (selectedDate != null) {
+      setState(() {
+        _dateController.text = selectedDate.toLocal().toString().split(' ')[0];
+      });
+    }
+  },
+  validator: (value) {
+    if (value == null || value.isEmpty) {
+      return 'Please select a date';
+    }
+    return null;
+  },
 ),
-validator: (value) {
-if (value == null || value.isEmpty) {
-return 'Please enter the date';
-}
-return null;
-},
-),
+
 ),
 ),
 ),
