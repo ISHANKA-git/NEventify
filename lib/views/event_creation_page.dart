@@ -290,7 +290,12 @@ child: TextFormField(
   controller: _dateController,
   decoration: InputDecoration(
     labelText: 'Date',
-    icon: Icon(Icons.calendar_today, color: Color(0xFF00BF63)),
+    icon: Padding(
+      padding: const EdgeInsets.only(left:10),
+      child: Icon(Icons.calendar_today, color: Color(0xFF00BF63)),
+    ),
+    border: InputBorder.none,
+    contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 10),
   ),
   readOnly: true, // Prevent manual input
   onTap: () async {
