@@ -117,7 +117,8 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               width: screenwidth * .2,
                               height: 50,
-                              child: Image.asset("assets/homePage/filtericon.png"),
+                              child:
+                              Image.asset("assets/homePage/filtericon.png"),
                             ),
                           ],
                         ),
@@ -258,9 +259,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Row(
                           children: [
-                            Container(
-                              width: screenwidth * .05,
-                            ),
                             SizedBox(
                               width: screenwidth * .3,
                               child: Column(
@@ -310,9 +308,6 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                             ),
-                            Container(
-                              width: screenwidth * .05,
-                            ),
                           ],
                         ),
                         const SizedBox(
@@ -335,22 +330,23 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               width: screenwidth * .45,
                               child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                            const PopularEvents()),
-                                      );
-                                    },
-                                    child: const Text(
-                                      "View More",
-                                      style: TextStyle(
-                                          fontSize: 12, color: Colors.green),
-                                    ),
-                                  )),
+                                alignment: Alignment.centerRight,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                          const PopularEvents()),
+                                    );
+                                  },
+                                  child: const Text(
+                                    "View More",
+                                    style: TextStyle(
+                                        fontSize: 12, color: Colors.green),
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -363,24 +359,31 @@ class _HomePageState extends State<HomePage> {
                             child: StreamBuilder<QuerySnapshot>(
                               stream: getEventsStream(),
                               builder: (context, snapshot) {
-                                if (snapshot.connectionState == ConnectionState.waiting) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 }
                                 if (snapshot.hasError) {
                                   return Text('Error: ${snapshot.error}');
                                 }
-                                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                                if (!snapshot.hasData ||
+                                    snapshot.data!.docs.isEmpty) {
                                   return Text('No events available.');
                                 }
 
                                 List<Widget> eventWidgets = [];
 
-                                for (int i = 0; i < snapshot.data!.docs.length; i += 2) {
+                                for (int i = 0;
+                                i < snapshot.data!.docs.length;
+                                i += 2) {
                                   Map<String, dynamic> eventData1 =
-                                  snapshot.data!.docs[i].data() as Map<String, dynamic>;
-                                  String eventName1 = eventData1['eventName'] ?? 'No Name';
+                                  snapshot.data!.docs[i].data()
+                                  as Map<String, dynamic>;
+                                  String eventName1 =
+                                      eventData1['eventName'] ?? 'No Name';
                                   String date1 = eventData1['date'] ?? 'No Date';
-                                  String imagePath1 = eventData1['imagePath1'] ?? '';
+                                  String imagePath1 =
+                                      eventData1['imagePath1'] ?? '';
 
                                   Widget eventWidget1 = _buildEventCard(
                                     screenwidth,
@@ -393,10 +396,13 @@ class _HomePageState extends State<HomePage> {
 
                                   if (i + 1 < snapshot.data!.docs.length) {
                                     Map<String, dynamic> eventData2 =
-                                    snapshot.data!.docs[i + 1].data() as Map<String, dynamic>;
-                                    String eventName2 = eventData2['eventName'] ?? 'No Name';
+                                    snapshot.data!.docs[i + 1].data()
+                                    as Map<String, dynamic>;
+                                    String eventName2 =
+                                        eventData2['eventName'] ?? 'No Name';
                                     String date2 = eventData2['date'] ?? 'No Date';
-                                    String imagePath2 = eventData2['imagePath1'] ?? '';
+                                    String imagePath2 =
+                                        eventData2['imagePath1'] ?? '';
 
                                     eventWidget2 = _buildEventCard(
                                       screenwidth,
@@ -408,7 +414,8 @@ class _HomePageState extends State<HomePage> {
 
                                   eventWidgets.addAll([
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
                                       children: [
                                         Expanded(
                                           child: Center(child: eventWidget1),
@@ -452,42 +459,40 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-Widget _buildEventCard(double screenwidth, String imagePath, String eventName, String date) {
-  return Expanded(
-    flex: 1,
-    child: SizedBox(
-      width: screenwidth * 0.45,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (imagePath.isNotEmpty)
-            Image.network(
-              imagePath,
-              width: screenwidth * 0.4,
-              height: screenwidth * 0.4,
-              fit: BoxFit.cover,
-            )
-          else
-            SizedBox(
-              width: screenwidth * 0.4,
-              height: screenwidth * 0.4,
-            ),
-          Text(
-            eventName,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-            ),
+Widget _buildEventCard(
+    double screenwidth, String imagePath, String eventName, String date) {
+  return SizedBox(
+    width: screenwidth * 0.45,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (imagePath.isNotEmpty)
+          Image.network(
+            imagePath,
+            width: screenwidth * 0.4,
+            height: screenwidth * 0.4,
+            fit: BoxFit.cover,
+          )
+        else
+          SizedBox(
+            width: screenwidth * 0.4,
+            height: screenwidth * 0.4,
           ),
-          Text(
-            date,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w200,
-            ),
+        Text(
+          eventName,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
           ),
-        ],
-      ),
+        ),
+        Text(
+          date,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w200,
+          ),
+        ),
+      ],
     ),
   );
 }
