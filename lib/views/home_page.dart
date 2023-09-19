@@ -14,7 +14,6 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
 
   Stream<QuerySnapshot> getEventsStream() {
-    // Replace 'events' with the name of your Firestore collection
     return FirebaseFirestore.instance.collection('events').snapshots();
   }
 
@@ -36,7 +35,7 @@ class _HomePageState extends State<HomePage> {
                 child: SizedBox(
                   width: screenwidth * .9,
                   child: SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     child: Column(
                       children: [
                         const SizedBox(
@@ -118,8 +117,7 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               width: screenwidth * .2,
                               height: 50,
-                              child:
-                              Image.asset("assets/homePage/filtericon.png"),
+                              child: Image.asset("assets/homePage/filtericon.png"),
                             ),
                           ],
                         ),
@@ -235,22 +233,23 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               width: screenwidth * .45,
                               child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                            const UpcomingEvents()),
-                                      );
-                                    },
-                                    child: const Text(
-                                      "View More",
-                                      style: TextStyle(
-                                          fontSize: 12, color: Colors.green),
-                                    ),
-                                  )),
+                                alignment: Alignment.centerRight,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                          const UpcomingEvents()),
+                                    );
+                                  },
+                                  child: const Text(
+                                    "View More",
+                                    style: TextStyle(
+                                        fontSize: 12, color: Colors.green),
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -357,35 +356,85 @@ class _HomePageState extends State<HomePage> {
                         ),
                         const SizedBox(
                           height: 30,
-                        ),
+                        ), // Stream builder
+                        SizedBox(
+                          width: screenwidth, // Make it the full width of the screen
+                          child: Center(
+                            child: StreamBuilder<QuerySnapshot>(
+                              stream: getEventsStream(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState == ConnectionState.waiting) {
+                                  return CircularProgressIndicator();
+                                }
+                                if (snapshot.hasError) {
+                                  return Text('Error: ${snapshot.error}');
+                                }
+                                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                                  return Text('No events available.');
+                                }
 
-                        // Add the StreamBuilder here
-                        StreamBuilder<QuerySnapshot>(
-                          stream: getEventsStream(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState == ConnectionState.waiting) {
-                              return CircularProgressIndicator();
-                            }
-                            if (snapshot.hasError) {
-                              return Text('Error: ${snapshot.error}');
-                            }
-                            if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                              return Text('No events available.');
-                            }
+                                List<Widget> eventWidgets = [];
 
-                            // Display Firestore data here
-                            return Column(
-                              children: snapshot.data!.docs.map((eventDoc) {
-                                Map<String, dynamic> eventData = eventDoc.data() as Map<String, dynamic>;
-                                return ListTile(
-                                  title: Text(eventData['eventName']),
-                                  subtitle: Text(eventData['date']),
-                                  // Add more widgets for other event data
+                                for (int i = 0; i < snapshot.data!.docs.length; i += 2) {
+                                  Map<String, dynamic> eventData1 =
+                                  snapshot.data!.docs[i].data() as Map<String, dynamic>;
+                                  String eventName1 = eventData1['eventName'] ?? 'No Name';
+                                  String date1 = eventData1['date'] ?? 'No Date';
+                                  String imagePath1 = eventData1['imagePath1'] ?? '';
+
+                                  Widget eventWidget1 = _buildEventCard(
+                                    screenwidth,
+                                    imagePath1,
+                                    eventName1,
+                                    date1,
+                                  );
+
+                                  Widget eventWidget2 = SizedBox(); // Empty widget as a placeholder
+
+                                  if (i + 1 < snapshot.data!.docs.length) {
+                                    Map<String, dynamic> eventData2 =
+                                    snapshot.data!.docs[i + 1].data() as Map<String, dynamic>;
+                                    String eventName2 = eventData2['eventName'] ?? 'No Name';
+                                    String date2 = eventData2['date'] ?? 'No Date';
+                                    String imagePath2 = eventData2['imagePath1'] ?? '';
+
+                                    eventWidget2 = _buildEventCard(
+                                      screenwidth,
+                                      imagePath2,
+                                      eventName2,
+                                      date2,
+                                    );
+                                  }
+
+                                  eventWidgets.addAll([
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          child: Center(child: eventWidget1),
+                                        ),
+                                        SizedBox(width: 16),
+                                        Expanded(
+                                          child: Center(child: eventWidget2),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 16,
+                                    ),
+                                  ]);
+                                }
+
+                                return Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Column(
+                                    children: eventWidgets,
+                                  ),
                                 );
-                              }).toList(),
-                            );
-                          },
-                        ),
+                              },
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -401,4 +450,44 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+}
+
+Widget _buildEventCard(double screenwidth, String imagePath, String eventName, String date) {
+  return Expanded(
+    flex: 1,
+    child: SizedBox(
+      width: screenwidth * 0.45,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (imagePath.isNotEmpty)
+            Image.network(
+              imagePath,
+              width: screenwidth * 0.4,
+              height: screenwidth * 0.4,
+              fit: BoxFit.cover,
+            )
+          else
+            SizedBox(
+              width: screenwidth * 0.4,
+              height: screenwidth * 0.4,
+            ),
+          Text(
+            eventName,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          Text(
+            date,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w200,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }
