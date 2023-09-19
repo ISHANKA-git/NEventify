@@ -20,7 +20,7 @@ class _EventCreationPageState extends State<EventCreationPage> {
   TextEditingController _startTimeController = TextEditingController();
   TextEditingController _endTimeController = TextEditingController();
 
-  File? _image; // Store the selected image file
+  String? _selectedImagePath; // Store the selected image path
 
   FirebaseFirestore firestore = FirebaseFirestore.instance; // Initialize Firestore
 
@@ -30,23 +30,9 @@ class _EventCreationPageState extends State<EventCreationPage> {
 
     if (pickedFile != null) {
       setState(() {
-        _image = File(pickedFile.path);
+        _selectedImagePath = pickedFile.path; // Store the selected image path
       });
     }
-  }
-
-  void resetForm() {
-    _eventNameController.clear();
-    _clubNameController.clear();
-    _locationController.clear();
-    _dateController.clear();
-    _maxEntriesController.clear();
-    _tagsController.clear();
-    _startTimeController.clear();
-    _endTimeController.clear();
-    setState(() {
-      _image = null;
-    });
   }
 
   void createEvent() {
@@ -61,10 +47,6 @@ class _EventCreationPageState extends State<EventCreationPage> {
     // Create a reference to a Firestore collection (e.g., 'events')
     CollectionReference events = firestore.collection('events');
 
-    // Example: Add the image file path to the Firestore document.
-    // 'imagePath' is a field in your Firestore document where you store the image path.
-    String imagePath = _image != null ? _image!.path : '';
-
     // Add a new document to the collection
     events
         .add({
@@ -74,9 +56,9 @@ class _EventCreationPageState extends State<EventCreationPage> {
       'date': date,
       'maxEntries': maxEntries,
       'tags': tags,
-      'startTime': _startTimeController.text, // Add more fields as needed
+      'startTime': _startTimeController.text,
       'endTime': _endTimeController.text,
-      'imagePath': imagePath, // Add the image path to the Firestore document
+      'imagePath': _selectedImagePath, // Add the selected image path to the Firestore document
     })
         .then((value) {
       // Document added successfully
@@ -91,115 +73,137 @@ class _EventCreationPageState extends State<EventCreationPage> {
         SnackBar(content: Text('Error creating event: $error')),
       );
     });
-
-    resetForm();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Color(0xFFC8E6C9), // Green background color for the icon
-                shape: BoxShape.circle, // Rounded shape
-              ),
-              child: IconButton(
-                icon: Icon(Icons.arrow_back_ios_sharp, color: Color(0xFF00BF63)),
-                onPressed: () {
-                  Navigator.of(context).pop(); // Navigate back to the previous page
-                },
-              ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Color(0xFFC8E6C9), // Green background color for the icon
+              shape: BoxShape.circle, // Rounded shape
+            ),
+            child: IconButton(
+              icon: Icon(Icons.arrow_back_ios_sharp, color: Color(0xFF00BF63)),
+              onPressed: () {
+                Navigator.of(context).pop(); // Navigate back to the previous page
+              },
             ),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Create Event',
-                      style: TextStyle(
-                        fontSize: 34,
-                        fontWeight: FontWeight.bold,
-                      ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                SizedBox(height: 30),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Create Event',
+                    style: TextStyle(
+                      fontSize: 34,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 20),
-                  SizedBox(height: 10),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 10), // Add padding to the right
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.90,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFC8E6C9),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        padding: EdgeInsets.all(16),
-                        child: Column(
-                          children: [
-                            Icon(Icons.image, size: 60, color: Color(0xFF00BF63)),
-                            SizedBox(height: 10),
-                            Text('Click and upload image/video', style: TextStyle(fontSize: 16)),
-                            SizedBox(height: 10),
-                            ElevatedButton(
-                              onPressed: _pickImage,
-                              child: Text('Upload Image'),
-                              style: ElevatedButton.styleFrom(
-                                primary: Color(0xFFC8E6C9),
-                                onPrimary: Color(0xFF00BF63),
-                                side: BorderSide(width: 2, color: Color(0xFF00BF63)),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
+                ),
+                SizedBox(height: 20),
+                SizedBox(height: 10),
+                Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 10), // Add padding to the right
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.90,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFC8E6C9),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          if (_selectedImagePath != null)
+                            Column(
+                              children: [
+                                SizedBox(height: 10), // Add some spacing
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center, // Center the text and icon horizontally
+                                  children: [
+                                    Icon(
+                                      Icons.image, // You can change this to an appropriate icon
+                                      color: Color(0xFF00BF63), // Icon color
+                                    ),
+                                    SizedBox(width: 5), // Add spacing between the icon and text
+                                    Flexible(
+                                      child: Text(
+                                        'Selected Image: ${_selectedImagePath!.split('/').last}', // Display the image file name
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Color(0xFF00BF63), // Text color
+                                        ),
+                                        overflow: TextOverflow.ellipsis, // Add ellipsis for long names
+                                      ),
+                                    ),
+                                  ],
                                 ),
+                              ],
+                            ),
+                          SizedBox(height: 10),
+                          Text('Click and upload image/video', style: TextStyle(fontSize: 16)),
+                          SizedBox(height: 10),
+                          ElevatedButton(
+                            onPressed: _pickImage,
+                            child: Text('Upload Image'),
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0xFFC8E6C9),
+                              onPrimary: Color(0xFF00BF63),
+                              side: BorderSide(width: 2, color: Color(0xFF00BF63)),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
                               ),
                             ),
-
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-SizedBox(height: 30),
-  Padding(
-    padding: const EdgeInsets.only(right: 10),
-    child: Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey),
-      ),
-      child: TextFormField(
-        controller: _eventNameController,
-        decoration: InputDecoration(
-          labelText: 'Event Name',
-          icon: Padding(
-            padding: EdgeInsets.only(left: 10), // Adding left padding here
-            child: Icon(Icons.event, color: Color(0xFF00BF63)),
-          ),
-          border: InputBorder.none,
-          contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 10), // Adjust as needed
-        ),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Please enter an event name';
-          }
-          return null;
-        },
-      ),
-    ),
-  ),
+                ),
+                SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.grey),
+                    ),
+                    child: TextFormField(
+                      controller: _eventNameController,
+                      decoration: const InputDecoration(
+                        labelText: 'Event Name',
+                        icon: Padding(
+                          padding: EdgeInsets.only(left: 10), // Adding left padding here
+                          child: Icon(Icons.event, color: Color(0xFF00BF63)),
+                        ),
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 10), // Adjust as needed
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter an event name';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                ),
 
 SizedBox(height: 20),
 Padding(
@@ -269,33 +273,23 @@ borderRadius: BorderRadius.circular(8),
 border: Border.all(color: Colors.grey),
 ),
 child: TextFormField(
-  controller: _dateController,
-  decoration: InputDecoration(
-    labelText: 'Date',
-    icon: Icon(Icons.calendar_today, color: Color(0xFF00BF63)),
+controller: _dateController,
+decoration: InputDecoration(
+labelText: 'Date',
+  icon: Padding(
+    padding: EdgeInsets.only(left: 10),
+child: Icon(Icons.calendar_today, color: Color(0xFF00BF63)),
   ),
-  readOnly: true, // Prevent manual input
-  onTap: () async {
-    final selectedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(DateTime.now().year + 1),
-    );
-    if (selectedDate != null) {
-      setState(() {
-        _dateController.text = selectedDate.toLocal().toString().split(' ')[0];
-      });
-    }
-  },
-  validator: (value) {
-    if (value == null || value.isEmpty) {
-      return 'Please select a date';
-    }
-    return null;
-  },
+border: InputBorder.none,
+  contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 10),
 ),
-
+validator: (value) {
+if (value == null || value.isEmpty) {
+return 'Please enter the date';
+}
+return null;
+},
+),
 ),
 ),
 ),
@@ -422,23 +416,22 @@ return null;
 ],
 ),
 
-SizedBox(height: 30),
-  ElevatedButton(
-    onPressed: () {
-      if (_formKey.currentState != null &&
-          _formKey.currentState!.validate()) {
-        createEvent(); // Call the createEvent function to add data to Firestore
-      }
-    },
-    child: Text('Create Event'),
-    style: ElevatedButton.styleFrom(primary: Color(0xFF00BF63)),
-  ),
-
-],
-),
-),
-),
-)
-);
-}
+                  SizedBox(height: 30),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState != null &&
+                          _formKey.currentState!.validate()) {
+                        createEvent(); // Call the createEvent function to add data to Firestore
+                      }
+                    },
+                    child: Text('Create Event'),
+                    style: ElevatedButton.styleFrom(primary: Color(0xFF00BF63)),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+    );
+  }
 }
