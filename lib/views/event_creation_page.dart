@@ -34,6 +34,19 @@ class _EventCreationPageState extends State<EventCreationPage> {
       });
     }
   }
+  void resetForm() {
+    _eventNameController.clear();
+    _clubNameController.clear();
+    _locationController.clear();
+    _dateController.clear();
+    _maxEntriesController.clear();
+    _tagsController.clear();
+    _startTimeController.clear();
+    _endTimeController.clear();
+    setState(() {
+      _selectedImagePath = null;
+    });
+  }
 
   void createEvent() {
     // Get data from form controllers
@@ -73,6 +86,7 @@ class _EventCreationPageState extends State<EventCreationPage> {
         SnackBar(content: Text('Error creating event: $error')),
       );
     });
+    resetForm();
   }
 
   @override
@@ -104,7 +118,7 @@ class _EventCreationPageState extends State<EventCreationPage> {
             key: _formKey,
             child: Column(
               children: [
-                SizedBox(height: 30),
+
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
