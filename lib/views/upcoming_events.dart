@@ -28,8 +28,10 @@ class _UpcomingEventState extends State<UpcomingEvents> {
             child: IconButton(
               icon: Icon(Icons.arrow_back_ios_sharp, color: Color(0xFF00BF63)),
               onPressed: () {
-                Navigator.of(context)
-                    .pop(); // Navigate back to the previous page
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BottomNavigationWidget()),
+                );// Navigate back to the previous page
               },
             ),
           ),
