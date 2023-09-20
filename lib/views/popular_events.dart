@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:n_eventify/views/event_card.dart';
 
 class PopularEvents extends StatefulWidget {
   const PopularEvents({super.key});
