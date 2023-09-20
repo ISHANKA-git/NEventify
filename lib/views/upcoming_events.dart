@@ -1,44 +1,42 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:n_eventify/views/bottom_navigation_bar.dart';
-import 'package:n_eventify/views/home_page.dart';
+import 'event_card.dart'; // Import the EventCard widget
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UpcomingEvents extends StatefulWidget {
-  const UpcomingEvents({super.key});
-
-  @override
-  State<UpcomingEvents> createState() => _UpcomingEventState();
-}
-
-class _UpcomingEventState extends State<UpcomingEvents> {
+class UpcomingEvents extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final screenwidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Color(0xFFC8E6C9), // Green background color for the icon
-              shape: BoxShape.circle, // Rounded shape
-            ),
-            child: IconButton(
-              icon: Icon(Icons.arrow_back_ios_sharp, color: Color(0xFF00BF63)),
-              onPressed: () {
-                Navigator.of(context)
-                    .pop(); // Navigate back to the previous page
-              },
-            ),
-          ),
-        ),
-        title: Text('Upcoming Events',
-        style: TextStyle(
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-        ),), // Add the title here
+        title: Text('Upcoming Events'),
+        backgroundColor: Color(0xFF00BF63),
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('events').snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return CircularProgressIndicator();
+          }
+
+          List<QueryDocumentSnapshot> documents = snapshot.data!.docs;
+
+          return ListView.builder(
+            itemCount: documents.length,
+            itemBuilder: (context, index) {
+              final event = documents[index].data() as Map<String, dynamic>;
+              return EventCard(
+                eventName: event['eventName'],
+                clubName: event['clubName'],
+                location: event['location'],
+                date: event['date'],
+                maxEntries: event['maxEntries'],
+                tags: List<String>.from(event['tags']),
+                startTime: event['startTime'],
+                endTime: event['endTime'],
+                imagePath: event['imagePath'],
+              );
+            },
+          );
+        },
       ),
     );
   }
