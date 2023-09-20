@@ -42,10 +42,16 @@ class _PopularEventsState extends State<PopularEvents> {
                         itemBuilder: (context, Index) {
                           final DocumentSnapshot records =
                               snapshots.data!.docs[Index];
+                          final String imageUrl = records["image"];
                           return Container(
                             child: ListTile(
                               title: Text(records["clubName"]),
                               subtitle: Text(records["date"]),
+                              leading: Image.network(
+                                imageUrl,
+                                width: 50,
+                                height: 50,
+                              ),
                             ),
                           );
                         });
