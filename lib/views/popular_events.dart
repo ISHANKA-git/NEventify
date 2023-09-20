@@ -18,19 +18,19 @@ class _PopularEventsState extends State<PopularEvents> {
       appBar: AppBar(
         title: const Text("Popular Events"),
         centerTitle: true,
-        backgroundColor: Color(0xFF00BF63),
+        backgroundColor: const Color(0xFF00BF63),
       ),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 500,
               child: StreamBuilder(
                 stream: _popular_events.snapshots(),
                 builder: (context, AsyncSnapshot snapshots) {
                   if (snapshots.connectionState == ConnectionState.waiting) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(
                         color: Colors.green,
                       ),
@@ -56,8 +56,8 @@ class _PopularEventsState extends State<PopularEvents> {
                           );
                         });
                   } else {}
-                  return Center(
-                    child: Text("There is data"),
+                  return const Center(
+                    child: Text("There is no data"),
                   );
                 },
               ),
