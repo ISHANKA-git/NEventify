@@ -31,11 +31,13 @@ dependencies:
   flutter:
     sdk: flutter
 
+
+
   google_fonts: ^5.1.0
   url_launcher: ^6.0.9 # Replace with the desired version
   share_plus: ^2.0.2 # Replace with the desired version
   flutter_rating_bar: ^4.0.0 # Replace with the desired version
-
+  image_picker: ^0.8.4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -46,7 +48,7 @@ dependencies:
   firebase_storage: ^11.2.6
   cached_network_image: ^3.2.3
   cloud_firestore: ^4.9.1
-  image_picker: ^1.0.4
+
 
 dev_dependencies:
   flutter_test:
@@ -79,6 +81,7 @@ flutter:
    - assets/Photo Profile (2).png
    - assets/logo_withname.png
    - assets/onboard_icon1.png
+   - assets/thammu.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
