@@ -4,6 +4,9 @@ import 'package:n_eventify/views/login_signup.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+
 
 
 class UserProfileScreen extends StatefulWidget {
@@ -15,6 +18,10 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  File? _selectedImage;
+
   bool isFollowed = false;
   int followersCount = 442;
   bool isEditMode = false;
@@ -377,6 +384,58 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     );
   }
 
+//function to edit profile picture
+  Future<void> _showImagePickerDialog() async {
+    final picker = ImagePicker();
+    final pickedImage = await showDialog<File?>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Choose Profile Picture'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                leading: Icon(Icons.camera),
+                title: Text('Take a Picture'),
+                onTap: () async {
+                  final pickedFile =
+                  await picker.pickImage(source: ImageSource.camera);
+                  Navigator.of(context).pop(pickedFile != null
+                      ? File(pickedFile.path)
+                      : null);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.image),
+                title: Text('Select from Gallery'),
+                onTap: () async {
+                  final pickedFile =
+                  await picker.pickImage(source: ImageSource.gallery);
+                  Navigator.of(context).pop(pickedFile != null
+                      ? File(pickedFile.path)
+                      : null);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.cancel),
+                title: Text('Remove Current Picture'),
+                onTap: () {
+                  Navigator.of(context).pop(null);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    if (pickedImage != null) {
+      setState(() {
+        _selectedImage = pickedImage;
+      });
+    }
+  }
 
 
 
@@ -392,28 +451,28 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             style: TextStyle(color: Colors.red),
           ),
           content: const Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text(
-                'No other upgrades available for Nventify ',
-                style: TextStyle(color: Colors.black),
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.sentiment_satisfied,
-                    color: Colors.green,
-                    size: 30,
-                  ),
-                  Text(
-                    ' 😊',
-                    style: TextStyle(fontSize: 24),
-                  ),
-                ],
-              ),
-            ]
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                  'No other upgrades available for Nventify ',
+                  style: TextStyle(color: Colors.black),
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.sentiment_satisfied,
+                      color: Colors.green,
+                      size: 30,
+                    ),
+                    Text(
+                      ' 😊',
+                      style: TextStyle(fontSize: 24),
+                    ),
+                  ],
+                ),
+              ]
           ),
           actions: <Widget>[
             TextButton(
@@ -442,404 +501,410 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        actions: [
+        key: _scaffoldKey, // Add this line to assign the GlobalKey
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          actions: [
+            const SizedBox(width: 10),
+            Container(
+              width: 40,
+              height: 40,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+              ),
+              child: IconButton(
+                icon: const Icon(Icons.message, color: Colors.greenAccent),
+                onPressed: () {
+                  // Handle message button click
+                },
 
-          Container(
-            width: 40,
-            height: 40,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
+              ),
             ),
-            child: IconButton(
-              icon: const Icon(Icons.message, color: Colors.greenAccent),
-              onPressed: () {
-                Scaffold.of(context).openDrawer(); // Handle message button click
-              },
-             
-            ),
-          ),
-          const SizedBox(width: 10),
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.white, width: 2.0),
-            ),
-            child: IconButton(
-              icon: const Icon(Icons.list,color: Colors.greenAccent),
-              onPressed: () {
-                // Handle list button click
-              },
-            ),
-          ),
 
-        ],
-        title: Row(
-          children: [
 
             const SizedBox(width: 10),
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.white, width: 2.0),
+              ),
+              child: IconButton(
+                icon: const Icon(Icons.list,color: Colors.greenAccent),
+                onPressed: () {
+                  _scaffoldKey.currentState?.openEndDrawer(); // Open the end drawer
+                },
+              ),
+            ),
 
           ],
+          title: Row(
+            children: [
+
+              const SizedBox(width: 10),
+
+            ],
+          ),
         ),
-      ),
-      body: Container(
-        color: Colors.white,
-        child: Column(
-          children: [
-            // First Row
-            Container(
-              color: Colors.white,
-              // Add your content here
-            ),
-            // Second Row
-            Container(
-              width: double.infinity,
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              padding: const EdgeInsets.all(16),
-              child: Container(
+
+        body: Container(
+          color: Colors.white,
+          child: Column(
+            children: [
+              // First Row
+              Container(
+                color: Colors.white,
+                // Add your content here
+              ),
+              // Second Row
+              Container(
                 width: double.infinity,
-                height: 350,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.greenAccent,
-                ),
-                child: Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: IconButton(
-                        icon: Icon(
-                          isEditMode ? Icons.done : Icons.edit,
-                          color: Colors.greenAccent,
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.all(16),
+                child: Container(
+                  width: double.infinity,
+                  height: 350,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.greenAccent,
+                  ),
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: IconButton(
+                          icon: Icon(
+                            isEditMode ? Icons.done : Icons.edit,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            // Handle edit button click
+                            toggleEditMode();
+                          },
                         ),
-                        onPressed: () {
-                          // Handle edit button click
-                          toggleEditMode();
-                        },
                       ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image.asset(
-                              'assets/logo_withname.png',
-                              fit: BoxFit.cover,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Semantics(
+                              label: 'Photo Profile (1).png', // Set the alt text here
+                              child: GestureDetector(
+                                onTap: _showImagePickerDialog,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: _selectedImage != null
+                                      ? Image.file(_selectedImage!, fit: BoxFit.cover)
+                                      : Image.asset('assets/thammu.png', fit: BoxFit.cover),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        isEditMode
-                            ? TextFormField(
-                          initialValue: name,
-                          onChanged: (value) {
-                            setState(() {
-                              name = value;
-                            });
-                          },
-                          decoration: const InputDecoration(
-                            labelText: 'Name',
-                          ),
-                        )
-                            : Text(
-                          name,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                              fontSize: 16),
-                        ),
-                        isEditMode
-                            ? TextFormField(
-                          initialValue: focVersion,
-                          onChanged: (value) {
-                            setState(() {
-                              focVersion = value;
-                            });
-                          },
-                          decoration: const InputDecoration(
-                            labelText: 'focVersion',
-                          ),
-                        )
-                            : Column(
-                          children: [
-                            Text(
-                              focVersion,
-                              style: const TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.black38),
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 16.0),
-                          ],
-                        ),
-                        if (isEditMode)
-                          TextFormField(
-                            initialValue: bio,
+
+                          const SizedBox(height: 8),
+                          isEditMode
+                              ? TextFormField(
+                            initialValue: name,
                             onChanged: (value) {
                               setState(() {
-                                bio = value;
+                                name = value;
                               });
                             },
                             decoration: const InputDecoration(
-                              labelText: 'bio',
+                              labelText: 'Name',
                             ),
                           )
-                        else
-                          Text(
-                            bio,
+                              : Text(
+                            name,
                             style: const TextStyle(
-                                fontSize: 15, color: Colors.black38),
-                            textAlign: TextAlign.center,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 16),
                           ),
-                        const SizedBox(height: 25),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              children: [
-                                Text(
-                                  followersCount.toString(),
+                          isEditMode
+                              ? TextFormField(
+                            initialValue: focVersion,
+                            onChanged: (value) {
+                              setState(() {
+                                focVersion = value;
+                              });
+                            },
+                            decoration: const InputDecoration(
+                              labelText: 'focVersion',
+                            ),
+                          )
+                              : Column(
+                            children: [
+                              Text(
+                                focVersion,
+                                style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.black38),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 16.0),
+                            ],
+                          ),
+                          if (isEditMode)
+                            TextFormField(
+                              initialValue: bio,
+                              onChanged: (value) {
+                                setState(() {
+                                  bio = value;
+                                });
+                              },
+                              decoration: const InputDecoration(
+                                labelText: 'bio',
+                              ),
+                            )
+                          else
+                            Text(
+                              bio,
+                              style: const TextStyle(
+                                  fontSize: 15, color: Colors.black38),
+                              textAlign: TextAlign.center,
+                            ),
+                          const SizedBox(height: 25),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    followersCount.toString(),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                  const Text(
+                                    'FOLLOWERS',
+                                    style: TextStyle(color: Colors.black38),
+                                  ),
+                                ],
+                              ),
+                              const Text('|'),
+                              const Column(
+                                children: [
+                                  Text(
+                                    '35',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                  Text(
+                                    'FOLLOWING',
+                                    style: TextStyle(color: Colors.black38),
+                                  ),
+                                ],
+                              ),
+                              ElevatedButton(
+                                onPressed: toggleFollow,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    side: const BorderSide(
+                                      color: Colors.green,
+                                      width: 2,
+                                    ),
+                                  ),
+                                ),
+                                child: Text(
+                                  isFollowed ? 'FOLLOWED' : 'FOLLOW',
                                   style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                ),
-                                const Text(
-                                  'FOLLOWERS',
-                                  style: TextStyle(color: Colors.black38),
-                                ),
-                              ],
-                            ),
-                            const Text('|'),
-                            const Column(
-                              children: [
-                                Text(
-                                  '35',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                ),
-                                Text(
-                                  'FOLLOWING',
-                                  style: TextStyle(color: Colors.black38),
-                                ),
-                              ],
-                            ),
-                            ElevatedButton(
-                              onPressed: toggleFollow,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.green,
-                                elevation: 0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  side: const BorderSide(
-                                    color: Colors.green,
-                                    width: 2,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
-                              child: Text(
-                                isFollowed ? 'FOLLOWED' : 'FOLLOW',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // Third Row - Increment Button and Profile Picture Icons
+              Container(
+                padding: const EdgeInsets.all(16),
+                color: Colors.white,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.add, color: Colors.green),
+                      onPressed: () {
+                        toggleAddButton();
+                        showNextImage();
+                      },
+                    ),
+                    const SizedBox(width: 10),
+                    Visibility(
+                      visible: currentImageIndex >= 1,
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
                         ),
-                      ],
+                        child: Image.asset(images[0]),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Visibility(
+                      visible: currentImageIndex >= 2,
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Image.asset(images[1]),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Visibility(
+                      visible: currentImageIndex >= 3,
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Image.asset(images[2]),
+                      ),
                     ),
                   ],
                 ),
               ),
-            ),
-            // Third Row - Increment Button and Profile Picture Icons
-            Container(
-              padding: const EdgeInsets.all(16),
-              color: Colors.white,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.add, color: Colors.green),
-                    onPressed: () {
-                      toggleAddButton();
-                      showNextImage();
-                    },
-                  ),
-                  const SizedBox(width: 10),
-                  Visibility(
-                    visible: currentImageIndex >= 1,
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Image.asset(images[0]),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Visibility(
-                    visible: currentImageIndex >= 2,
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Image.asset(images[1]),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Visibility(
-                    visible: currentImageIndex >= 3,
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Image.asset(images[2]),
-                    ),
-                  ),
-                ],
+              // Fourth Row (Scrollable Icons)
+              const SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    // Add your scrollable icons here
+                    Icon(Icons.star),
+                    Icon(Icons.favorite),
+                    Icon(Icons.comment),
+                    Icon(Icons.share),
+                    Icon(Icons.send),
+                  ],
+                ),
               ),
-            ),
-            // Fourth Row (Scrollable Icons)
-            const SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  // Add your scrollable icons here
-                  Icon(Icons.star),
-                  Icon(Icons.favorite),
-                  Icon(Icons.comment),
-                  Icon(Icons.share),
-                  Icon(Icons.send),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
+
         ),
 
-      ),
-
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            // Drawer header with app icon
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
+        endDrawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              // Drawer header with app icon
+              const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    // Display app icon at the top center
+                    Icon(Icons.event, size: 100, color: Colors.deepPurple),
+                    SizedBox(height: 10),
+                    Text(
+                      "App Name", // Display app name
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                  ],
+                ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  // Display app icon at the top center
-                  Icon(Icons.event, size: 100, color: Colors.deepPurple),
-                  SizedBox(height: 10),
-                  Text(
-                    "App Name", // Display app name
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                ],
+
+              // Menu items
+
+
+              ListTile(
+                leading: const Icon(
+                  Icons.star,
+                  color: Colors.yellow, // Customize the icon color as needed
+                ),
+                title: const Text("Rate Us"),
+                onTap: () {
+                  showRatingDialog(context);
+                },
               ),
-            ),
-
-            // Menu items
 
 
-            ListTile(
-              leading: const Icon(
-                Icons.star,
-                color: Colors.yellow, // Customize the icon color as needed
+              ListTile(
+                leading: const Icon(Icons.apps,
+                  color: Colors.brown,),
+                title: const Text("More Apps (Ad)"),
+                onTap: openMoreApps,
               ),
-              title: const Text("Rate Us"),
-              onTap: () {
-                showRatingDialog(context);
-              },
-            ),
-
-
-            ListTile(
-              leading: const Icon(Icons.apps,
-                color: Colors.brown,),
-              title: const Text("More Apps (Ad)"),
-              onTap: openMoreApps,
-            ),
-            ListTile(
-              leading: const Icon(Icons.share,
-                  color: Colors.lightGreen
+              ListTile(
+                leading: const Icon(Icons.share,
+                    color: Colors.lightGreen
+                ),
+                title: const Text("Share"),
+                onTap: () {
+                  shareApp(context); // Pass the BuildContext to the function
+                },
               ),
-              title: const Text("Share"),
-              onTap: () {
-                shareApp(context); // Pass the BuildContext to the function
-              },
-            ),
 
 
 
-            ListTile(
-              leading: const Icon(
-                Icons.feedback,
-                color: Colors.blue, // Customize the icon color as needed
+              ListTile(
+                leading: const Icon(
+                  Icons.feedback,
+                  color: Colors.blue, // Customize the icon color as needed
+                ),
+                title: const Text("Feedback"),
+                onTap: () {
+                  showFeedbackDialog(context);
+                },
               ),
-              title: const Text("Feedback"),
-              onTap: () {
-                showFeedbackDialog(context);
-              },
-            ),
 
 // Add the "Privacy Policy" ListTile in the Drawer
-            ListTile(
-              leading: const Icon(Icons.policy),
-              title: const Text("Privacy Policy"),
-              onTap: () {
-                openPrivacyPolicyDialog(context); // Open the privacy policy dialog
-              },
-            ),
+              ListTile(
+                leading: const Icon(Icons.policy),
+                title: const Text("Privacy Policy"),
+                onTap: () {
+                  openPrivacyPolicyDialog(context); // Open the privacy policy dialog
+                },
+              ),
 
 
 
-            ListTile(
-              leading: const Icon(Icons.system_update),
-              title: const Text("Check For Updates"),
-              onTap: () {
-                checkForUpdates(context);
-              },
-            ),
+              ListTile(
+                leading: const Icon(Icons.system_update),
+                title: const Text("Check For Updates"),
+                onTap: () {
+                  checkForUpdates(context);
+                },
+              ),
 
-            ListTile(
-              leading: const Icon(Icons.logout),
-              title: const Text("Logout"),
-              onTap: () async {
-                Navigator.pop(context); // Close the Drawer
-                Navigator.push(context, MaterialPageRoute(builder: (context){return const Login_SignUp();},),);
-                await widget._auth.signOut(); // Sign out the user
+              ListTile(
+                leading: const Icon(Icons.logout),
+                title: const Text("Logout"),
+                onTap: () async {
+                  Navigator.pop(context); // Close the Drawer
+                  Navigator.push(context, MaterialPageRoute(builder: (context){return const Login_SignUp();},),);
+                  await widget._auth.signOut(); // Sign out the user
 
-              },
-            ),
-
-
-
-
+                },
+              ),
 
 
 
@@ -847,9 +912,13 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
 
 
-          ],
-        ),
-      )
+
+
+
+
+            ],
+          ),
+        )
     );
 
 
