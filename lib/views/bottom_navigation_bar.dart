@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:n_eventify/views/event_creation_page.dart';
+import 'package:n_eventify/views/favorite_page.dart';
 import 'package:n_eventify/views/home_page.dart';
 import 'package:n_eventify/views/user_profile_screen.dart';
-
-
 
 import 'chat_list_screen.dart';
 
@@ -18,13 +17,10 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
   // List of pages to display for each tab
   final List<Widget> _pages = [
     HomePage(),
-    HomePage(),
+    FavoritePage(),
     EventCreationPage(),
     ChatListScreen(),
     UserProfileScreen()
-
-
-
   ];
 
   // Handle tab selection
