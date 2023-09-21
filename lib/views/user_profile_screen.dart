@@ -489,6 +489,115 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
 
 
+  // Function to profilesearch
+  void profilesearch(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: const Icon(Icons.near_me_outlined,
+                  color: Color(0xFF00BF63) // Gmail icon with red color
+              ),
+              title: const Text('🙎‍♀️‍♂  Amanda sewuwanndi'),
+              onTap: () {
+                Share.share('Check out my awesome app: YOUR_APP_NAME via SMS');
+                Navigator.of(context).pop(); // Close the modal sheet
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(
+                Icons.near_me_outlined,
+                color: Color(0xFF00BF63), // Nearby Share icon with blue color
+              ),
+              title: const Text("👨‍💼♀  Bagaya wishwajith"),
+              onTap: () {
+                // Handle Nearby Share functionality
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(
+                Icons.near_me_outlined,
+                color: Color(0xFF00BF63), // Chats icon with blue color
+              ),
+              title: const Text("🧕🏾♂  Saguna fathima"),
+              onTap: () {
+                // Handle Chats functionality
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(
+                Icons.near_me_outlined,
+                color: Color(0xFF00BF63), // Gmail icon with red color
+              ),
+              title: const Text("🙍‍♀  Chamoth Gayan"),
+              onTap: () {
+                // Handle Gmail functionality
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(
+                Icons.near_me_outlined,
+                color: Color(0xFF00BF63), // Gmail icon with red color
+              ),
+              title: const Text(" 🙎‍♀️♂   kathi areena"),
+              onTap: () {
+                // Handle Gmail functionality
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(
+                Icons.near_me_outlined,
+                color: Color(0xFF00BF63), // Gmail icon with red color
+              ),
+              title: const Text('👩🏻‍♂  kathi areena'),
+              onTap: () {
+                // Handle Gmail functionality
+              },
+            ),
+
+
+
+
+            ListTile(
+              leading: const Icon(
+                Icons.near_me_outlined,
+                color: Color(0xFF00BF63), // Gmail icon with red color
+              ),
+              title: const Text('🙎‍♀  Kalpana dilshan'),
+              onTap: () {
+                // Handle Gmail functionality
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(
+                Icons.search_off_outlined,
+                color: Color(0xFF00BF63), // Gmail icon with red color
+              ),
+              title: const Text("search more friends"),
+              onTap: () {
+                // Handle Gmail functionality
+              },
+            ),
+
+            // Add more sharing options as needed
+          ],
+        );
+      },
+    );
+  }
+
+
+
+
 
 
 
@@ -500,11 +609,55 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   final AuthServices _auth = AuthServices();
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         key: _scaffoldKey, // Add this line to assign the GlobalKey
         appBar: AppBar(
           backgroundColor: Colors.white,
           actions: [
+
+
+           // Add a Flexible widget to allow the search bar to expand
+            Flexible(
+              child: Visibility(
+
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: TextField( // Search icon color, set to #00BF63
+                    decoration: InputDecoration(
+                      hintText: 'Search your friend', // Placeholder text
+                      border: InputBorder.none,
+                      prefixIcon: GestureDetector(
+                        onTap: () {
+                          profilesearch(context); // Call your search function here
+                        },
+                        child: Icon(
+                          Icons.search,
+                          color: Color(0xFF00BF63), // Search icon color, set to #00BF63
+                        ),
+                      ),
+
+
+
+
+
+                    ),
+                    // Your search bar implementation here
+                  ),
+                ),
+              ),
+            ),
+
+
+
+
+
+
+
+
+
+
+
             const SizedBox(width: 10),
             Container(
               width: 40,
@@ -514,7 +667,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 color: Colors.white,
               ),
               child: IconButton(
-                icon: const Icon(Icons.message, color: Colors.greenAccent),
+                icon: const Icon(Icons.message, color: Color(0xFF00BF63)),
                 onPressed: () {
                   // Handle message button click
                 },
@@ -532,7 +685,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 border: Border.all(color: Colors.white, width: 2.0),
               ),
               child: IconButton(
-                icon: const Icon(Icons.list,color: Colors.greenAccent),
+                icon: const Icon(Icons.list,color: Color(0xFF00BF63)),
                 onPressed: () {
                   _scaffoldKey.currentState?.openEndDrawer(); // Open the end drawer
                 },
@@ -568,7 +721,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   height: 350,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.greenAccent,
+                    color: Color(0xFF00BF63),
                   ),
                   child: Stack(
                     children: [
@@ -708,12 +861,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                               ElevatedButton(
                                 onPressed: toggleFollow,
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.green,
+                                  backgroundColor: Colors.greenAccent,
                                   elevation: 0,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20),
                                     side: const BorderSide(
-                                      color: Colors.green,
+                                      color: Colors.yellow,
                                       width: 2,
                                     ),
                                   ),
