@@ -501,7 +501,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               leading: const Icon(Icons.near_me_outlined,
                   color: Color(0xFF00BF63) // Gmail icon with red color
               ),
-              title: const Text('🙎‍♀️‍♂  Amanda sewuwanndi'),
+              title: const Text('🙎‍♀️‍♂  Amanda sewwandi'),
               onTap: () {
                 Share.share('Check out my awesome app: YOUR_APP_NAME via SMS');
                 Navigator.of(context).pop(); // Close the modal sheet
@@ -513,7 +513,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 Icons.near_me_outlined,
                 color: Color(0xFF00BF63), // Nearby Share icon with blue color
               ),
-              title: const Text("👨‍💼♀  Bagaya wishwajith"),
+              title: const Text("👨‍💼♀  Bagya wishwajith"),
               onTap: () {
                 // Handle Nearby Share functionality
               },
@@ -546,7 +546,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 Icons.near_me_outlined,
                 color: Color(0xFF00BF63), // Gmail icon with red color
               ),
-              title: const Text(" 🙎‍♀️♂   kathi areena"),
+              title: const Text(" 🙎‍♀️♂   Dasun Sampath"),
               onTap: () {
                 // Handle Gmail functionality
               },
@@ -781,14 +781,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 shape: BoxShape.circle,
                 color: Colors.white,
               ),
-              child: IconButton(
-                icon: const Icon(Icons.message, color: Color(0xFF00BF63)),
-                onPressed: () {
-                  chat(context);// Handle message button click
-                },
+
 
               ),
-            ),
+            
 
 
             const SizedBox(width: 10),
@@ -800,7 +796,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 border: Border.all(color: Colors.white, width: 2.0),
               ),
               child: IconButton(
-                icon: const Icon(Icons.list,color: Color(0xFF00BF63)),
+                icon: const Icon(Icons.menu,color: Color(0xFF00BF63)),
                 onPressed: () {
                   _scaffoldKey.currentState?.openEndDrawer(); // Open the end drawer
                 },
@@ -836,7 +832,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   height: 350,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Color(0xFF00BF63),
+                    color: Color(0xFFE5FFEE),
                   ),
                   child: Stack(
                     children: [
@@ -860,7 +856,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             width: 100,
                             height: 100,
                             decoration: BoxDecoration(
-                              color: Colors.green,
+                              color: Color(0xFF8D00D4),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Semantics(
@@ -871,7 +867,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                   borderRadius: BorderRadius.circular(15),
                                   child: _selectedImage != null
                                       ? Image.file(_selectedImage!, fit: BoxFit.cover)
-                                      : Image.asset('assets/thammu.png', fit: BoxFit.cover),
+                                      : Image.asset('assets/profile.png', fit: BoxFit.cover),
                                 ),
                               ),
                             ),
@@ -981,7 +977,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20),
                                     side: const BorderSide(
-                                      color: Colors.yellow,
+                                      color: Color(0xFF00FF7C),
                                       width: 2,
                                     ),
                                   ),
