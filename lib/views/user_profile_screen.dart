@@ -557,7 +557,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 Icons.near_me_outlined,
                 color: Color(0xFF00BF63), // Gmail icon with red color
               ),
-              title: const Text('👩🏻‍♂  kathi areena'),
+              title: const Text('👩🏻‍♂  kathi areena '),
               onTap: () {
                 // Handle Gmail functionality
               },
@@ -594,6 +594,121 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       },
     );
   }
+
+
+
+
+  // Function to chat
+  void chat(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+
+      builder: (BuildContext context) {
+
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: const Icon(Icons.chat_bubble_outline,
+                  color: Color(0xFF00BF63) // Gmail icon with red color
+              ),
+              title: const Text('🙎‍♀️‍ Amanda sewuwanndi  👐'),
+              onTap: () {
+                Share.share('Check out my awesome app: YOUR_APP_NAME via SMS');
+                Navigator.of(context).pop(); // Close the modal sheet
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(
+                Icons.chat_bubble_outline,
+                color: Color(0xFF00BF63), // Nearby Share icon with blue color
+              ),
+              title: const Text("👨‍💼 Bagaya wishwajith  👐"),
+              onTap: () {
+                // Handle Nearby Share functionality
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(
+                Icons.chat_bubble_outline,
+                color: Color(0xFF00BF63), // Chats icon with blue color
+              ),
+              title: const Text("🧕🏾 Saguna fathima  👐"),
+              onTap: () {
+                // Handle Chats functionality
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(
+                Icons.mark_chat_read_outlined,
+                color: Color(0xFF00BF63), // Gmail icon with red color
+              ),
+              title: const Text("🙍‍ Chamoth Gayan  👐"),
+              onTap: () {
+                // Handle Gmail functionality
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(
+                Icons.mark_chat_read_outlined,
+                color: Color(0xFF00BF63), // Gmail icon with red color
+              ),
+              title: const Text(" 🙎‍♀️  kathi areena    👐"),
+              onTap: () {
+                // Handle Gmail functionality
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(
+                Icons.mark_chat_unread_outlined,
+                color: Color(0xFF00BF63), // Gmail icon with red color
+              ),
+              title: const Text('👩🏻‍  kathi areena  👐'),
+              onTap: () {
+                // Handle Gmail functionality
+              },
+            ),
+
+
+
+
+            ListTile(
+              leading: const Icon(
+                Icons.mark_chat_unread_outlined,
+                color: Color(0xFF00BF63), // Gmail icon with red color
+              ),
+              title: const Text('🙎‍  Kalpana dilshan  👐'),
+              onTap: () {
+                // Handle Gmail functionality
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(
+                Icons.add_card,
+                color: Color(0xFF00BF63), // Gmail icon with red color
+              ),
+              title: const Text("Add more friends for chat"),
+              onTap: () {
+                // Handle Gmail functionality
+              },
+            ),
+
+            // Add more sharing options as needed
+          ],
+        );
+
+      },
+    );
+  }
+
+
+
 
 
 
@@ -669,7 +784,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               child: IconButton(
                 icon: const Icon(Icons.message, color: Color(0xFF00BF63)),
                 onPressed: () {
-                  // Handle message button click
+                  chat(context);// Handle message button click
                 },
 
               ),
