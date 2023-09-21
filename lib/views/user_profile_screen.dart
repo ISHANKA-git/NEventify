@@ -396,7 +396,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                leading: Icon(Icons.camera),
+                leading: Icon(Icons.camera_alt_outlined,color: Colors.blueGrey,),
                 title: Text('Take a Picture'),
                 onTap: () async {
                   final pickedFile =
@@ -407,7 +407,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.image),
+                leading: Icon(Icons.image,
+                  color: Colors.grey,),
                 title: Text('Select from Gallery'),
                 onTap: () async {
                   final pickedFile =
@@ -418,7 +419,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 },
               ),
               ListTile(
-                leading: Icon(Icons.cancel),
+                leading: Icon(Icons.cancel,
+                  color: Colors.redAccent,),
                 title: Text('Remove Current Picture'),
                 onTap: () {
                   Navigator.of(context).pop(null);
@@ -829,7 +831,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 padding: const EdgeInsets.all(16),
                 child: Container(
                   width: double.infinity,
-                  height: 350,
+                  height: 380,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Color(0xFFE5FFEE),
@@ -841,7 +843,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         child: IconButton(
                           icon: Icon(
                             isEditMode ? Icons.done : Icons.edit,
-                            color: Colors.white,
+                            color: Color(0xFF00BF63),
                           ),
                           onPressed: () {
                             // Handle edit button click
@@ -972,12 +974,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                               ElevatedButton(
                                 onPressed: toggleFollow,
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.greenAccent,
+                                  backgroundColor:Color(0xFF00BF63),
                                   elevation: 0,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20),
                                     side: const BorderSide(
-                                      color: Color(0xFF00FF7C),
+                                      color: Colors.greenAccent,
                                       width: 2,
                                     ),
                                   ),
@@ -1005,69 +1007,132 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IconButton(
-                      icon: const Icon(Icons.add, color: Colors.green),
-                      onPressed: () {
-                        toggleAddButton();
-                        showNextImage();
-                      },
-                    ),
-                    const SizedBox(width: 10),
-                    Visibility(
-                      visible: currentImageIndex >= 1,
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Image.asset(images[0]),
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      color: Colors.white,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Color(0xFF00BF63), // Set your desired background color
+                              borderRadius: BorderRadius.circular(16), // Makes it a rounded square
+                            ),
+                            child: IconButton(
+                              icon: const Icon(Icons.add_circle, color: Colors.white),
+                              onPressed: () {
+                                // Add your onPressed logic for the first button here
+                              },
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Color(0xFF00BF63), // Set your desired background color
+                              borderRadius: BorderRadius.circular(16), // Makes it a rounded square
+                            ),
+                            child: IconButton(
+                              icon: Image.asset('assets/Photo Profile.png'),
+                              onPressed: () {
+                                // Add your onPressed logic for the second button here
+                              },
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Color(0xFF00BF63), // Set your desired background color
+                              borderRadius: BorderRadius.circular(16), // Makes it a rounded square
+                            ),
+                            child: IconButton(
+                              icon: Image.asset('assets/Photo Profile (1).png'), // Replace with your asset path
+                              //icon: const Icon(Icons.add, color: Colors.white),
+                              onPressed: () {
+                                // Add your onPressed logic for the second button here
+                              },
+                            ),
+                          ),
+
+                          const SizedBox(width: 10),
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Color(0xFF00BF63), // Set your desired background color
+                              borderRadius: BorderRadius.circular(16), // Makes it a rounded square
+                            ),
+                            child: IconButton(
+                              icon: Image.asset('assets/Photo Profile (2).png'),
+                              onPressed: () {
+                                // Add your onPressed logic for the second button here
+                              },
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    Visibility(
-                      visible: currentImageIndex >= 2,
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Image.asset(images[1]),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Visibility(
-                      visible: currentImageIndex >= 3,
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Image.asset(images[2]),
-                      ),
-                    ),
-                  ],
-                ),
+                    )
+
+
+
+
+
+                  ]
+                )
               ),
               // Fourth Row (Scrollable Icons)
-              const SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    // Add your scrollable icons here
-                    Icon(Icons.star),
-                    Icon(Icons.favorite),
-                    Icon(Icons.comment),
-                    Icon(Icons.share),
-                    Icon(Icons.send),
-                  ],
-                ),
+              Container(
+                  padding: const EdgeInsets.all(50),
+                  color: Colors.white,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 150,
+                        height: 20,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFe7fdf1),  // Set your desired background color
+                          borderRadius: BorderRadius.circular(8), // Makes it a rounded square
+                        ),
+                        child: IconButton(
+                          icon: const Icon(Icons.event, color: Color(0xFF00BF63)),
+                          onPressed: () {
+                            // Add your onPressed logic for the first button here
+                          },
+                        ),
+                      ),
+
+                      const SizedBox(width: 10),
+                      Container(
+                        width: 150,
+                        height: 20,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFe7fdf1),  // Set your desired background color
+                          borderRadius: BorderRadius.circular(8), // Makes it a rounded square
+                        ),
+                        child: IconButton(
+                          icon: const Icon(Icons.event_note_outlined, color: Color(0xFF00BF63)),
+                          onPressed: () {
+                            // Add your onPressed logic for the second button here
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
               ),
+
+
+
+
+
+
+
+
             ],
           ),
 
@@ -1142,7 +1207,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
 // Add the "Privacy Policy" ListTile in the Drawer
               ListTile(
-                leading: const Icon(Icons.policy),
+                leading: const Icon(Icons.policy,
+                  color: Colors.black26,),
                 title: const Text("Privacy Policy"),
                 onTap: () {
                   openPrivacyPolicyDialog(context); // Open the privacy policy dialog
@@ -1152,7 +1218,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
 
               ListTile(
-                leading: const Icon(Icons.system_update),
+                leading: const Icon(Icons.system_update,
+                  color: Colors.blueGrey),
                 title: const Text("Check For Updates"),
                 onTap: () {
                   checkForUpdates(context);
@@ -1160,7 +1227,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ),
 
               ListTile(
-                leading: const Icon(Icons.logout),
+                leading: const Icon(Icons.logout,
+                  color: Colors.blue),
                 title: const Text("Logout"),
                 onTap: () async {
                   Navigator.pop(context); // Close the Drawer
