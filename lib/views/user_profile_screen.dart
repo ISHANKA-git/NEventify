@@ -625,10 +625,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ListTile(
-              leading: const Icon(Icons.chat_bubble_outline,
+              leading: const Icon(Icons.add_circle,
                   color: Color(0xFF00BF63) // Gmail icon with red color
               ),
-              title: const Text('🙎‍♀️‍ Amanda sewuwanndi  👐'),
+              title: const Text('🙎‍♀️‍ Amanda sewuwanndi  '),
               onTap: () {
                 Share.share('Check out my awesome app: YOUR_APP_NAME via SMS');
                 Navigator.of(context).pop(); // Close the modal sheet
@@ -637,10 +637,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
             ListTile(
               leading: const Icon(
-                Icons.chat_bubble_outline,
+                Icons.add_circle,
                 color: Color(0xFF00BF63), // Nearby Share icon with blue color
               ),
-              title: const Text("👨‍💼 Bagaya wishwajith  👐"),
+              title: const Text("👨‍💼 Bagaya wishwajith  "),
               onTap: () {
                 // Handle Nearby Share functionality
               },
@@ -648,10 +648,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
             ListTile(
               leading: const Icon(
-                Icons.chat_bubble_outline,
+                Icons.add_circle,
                 color: Color(0xFF00BF63), // Chats icon with blue color
               ),
-              title: const Text("🧕🏾 Saguna fathima  👐"),
+              title: const Text("🧕🏾 Saguna fathima  "),
               onTap: () {
                 // Handle Chats functionality
               },
@@ -659,10 +659,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
             ListTile(
               leading: const Icon(
-                Icons.mark_chat_read_outlined,
+                Icons.add_circle,
                 color: Color(0xFF00BF63), // Gmail icon with red color
               ),
-              title: const Text("🙍‍ Chamoth Gayan  👐"),
+              title: const Text("🙍‍ Chamoth Gayan  "),
               onTap: () {
                 // Handle Gmail functionality
               },
@@ -670,10 +670,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
             ListTile(
               leading: const Icon(
-                Icons.mark_chat_read_outlined,
+                Icons.add_circle,
                 color: Color(0xFF00BF63), // Gmail icon with red color
               ),
-              title: const Text(" 🙎‍♀️  kathi areena    👐"),
+              title: const Text(" 🙎‍♀️  kathi areena    "),
               onTap: () {
                 // Handle Gmail functionality
               },
@@ -681,10 +681,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
             ListTile(
               leading: const Icon(
-                Icons.mark_chat_unread_outlined,
+                Icons.add_circle,
                 color: Color(0xFF00BF63), // Gmail icon with red color
               ),
-              title: const Text('👩🏻‍  kathi areena  👐'),
+              title: const Text('👩🏻‍  kathi areena  '),
               onTap: () {
                 // Handle Gmail functionality
               },
@@ -695,10 +695,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
             ListTile(
               leading: const Icon(
-                Icons.mark_chat_unread_outlined,
+                Icons.add_circle,
                 color: Color(0xFF00BF63), // Gmail icon with red color
               ),
-              title: const Text('🙎‍  Kalpana dilshan  👐'),
+              title: const Text('🙎‍  Kalpana dilshan  '),
               onTap: () {
                 // Handle Gmail functionality
               },
@@ -709,7 +709,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 Icons.add_card,
                 color: Color(0xFF00BF63), // Gmail icon with red color
               ),
-              title: const Text("Add more friends for chat"),
+              title: const Text("Add more friends for faviroute"),
               onTap: () {
                 // Handle Gmail functionality
               },
@@ -1091,7 +1091,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             child: IconButton(
                               icon: const Icon(Icons.add_circle, color: Colors.white),
                               onPressed: () {
-                                handleButtonPressed(1);
+                                chat(context);
                               },
                             ),
                           ),
