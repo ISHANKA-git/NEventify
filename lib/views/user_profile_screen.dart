@@ -20,6 +20,40 @@ class UserProfileScreen extends StatefulWidget {
 class _UserProfileScreenState extends State<UserProfileScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  int currentImageIndex = -1;
+  bool showImage = false; // To control image visibility
+  bool showGreenLine1 = false;
+  bool showGreenLine2 = false;
+
+  List<String> images = [
+    'assets/Photo Profile (1).png',
+    'assets/Photo Profile (2).png',
+  ];
+
+  void handleButtonPressed(int index) {
+    setState(() {
+      if (currentImageIndex == index) {
+        // If the same button is pressed again, hide the image and green line
+        currentImageIndex = -1;
+        showImage = false;
+        showGreenLine1 = false;
+        showGreenLine2 = false;
+      } else {
+        // If a different button is pressed, update the image and green line
+        currentImageIndex = index;
+        showImage = true;
+        showGreenLine1 = index == 0;
+        showGreenLine2 = index == 1;
+      }
+    });
+  }
+
+
+
+
+
+
+
   File? _selectedImage;
 
   bool isFollowed = false;
@@ -30,9 +64,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       "I'm a music lover and tech enthusiast with a passion for attending and discovering exciting events.";
   String focVersion = 'FOC 21.1';
   bool isAddButtonPressed = false;
-  int currentImageIndex = 0;
 
-  List<String> images = ['Profile2.png', 'assets/logo_withname.png', 'assets/profile1.png'];
+
+
 
   void toggleFollow() {
     setState(() {
@@ -49,26 +83,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   void toggleEditMode() {
     setState(() {
       isEditMode = !isEditMode;
-    });
-  }
-
-  void toggleAddButton() {
-    setState(() {
-      isAddButtonPressed = !isAddButtonPressed;
-      if (!isAddButtonPressed) {
-        currentImageIndex = 0; // Reset image index when Add button is toggled off
-      }
-    });
-  }
-
-  void showNextImage() {
-    setState(() {
-      currentImageIndex++;
-      if (currentImageIndex >= images.length) {
-        currentImageIndex = 0; // Loop back to the first image
-      }
-
-
     });
   }
 
@@ -719,6 +733,60 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
 
 
+  //for tab bar 1
+
+
+  void disply(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          color: Colors.white, // Set the background color to white
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Image.asset(
+                'assets/disply.png.jpg', // Replace with your image asset path
+                width: 350, // Adjust the width as needed
+                height: 200, // Adjust the height as needed
+                fit: BoxFit.cover, // Adjust the fit as needed
+              ),
+              // Add any other content you want in the modal here
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+
+//for tab 2
+  void dis(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          color: Colors.white, // Set the background color to white
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Image.asset(
+                'assets/dis.png.jpg', // Replace with your image asset path
+                width: 300, // Adjust the width as needed
+                height: 200, // Adjust the height as needed
+                fit: BoxFit.cover, // Adjust the fit as needed
+              ),
+              // Add any other content you want in the modal here
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+
+
+
 
 
 
@@ -1023,7 +1091,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             child: IconButton(
                               icon: const Icon(Icons.add_circle, color: Colors.white),
                               onPressed: () {
-                                // Add your onPressed logic for the first button here
+                                handleButtonPressed(1);
                               },
                             ),
                           ),
@@ -1102,7 +1170,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         child: IconButton(
                           icon: const Icon(Icons.event, color: Color(0xFF00BF63)),
                           onPressed: () {
-                            // Add your onPressed logic for the first button here
+                            disply(context) ;// Add your onPressed logic for the first button here
                           },
                         ),
                       ),
@@ -1118,7 +1186,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         child: IconButton(
                           icon: const Icon(Icons.event_note_outlined, color: Color(0xFF00BF63)),
                           onPressed: () {
-                            // Add your onPressed logic for the second button here
+                            dis(context); // Add your onPressed logic for the second button here
                           },
                         ),
                       ),
@@ -1250,7 +1318,32 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
             ],
           ),
-        )
+          )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     );
 
 
