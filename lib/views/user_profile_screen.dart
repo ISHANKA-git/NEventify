@@ -7,8 +7,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-
-
 class UserProfileScreen extends StatefulWidget {
   UserProfileScreen({Key? key}) : super(key: key);
 
@@ -48,12 +46,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     });
   }
 
-
-
-
-
-
-
   File? _selectedImage;
 
   bool isFollowed = false;
@@ -64,9 +56,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       "I'm a music lover and tech enthusiast with a passion for attending and discovering exciting events.";
   String focVersion = 'FOC 21.1';
   bool isAddButtonPressed = false;
-
-
-
 
   void toggleFollow() {
     setState(() {
@@ -86,13 +75,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     });
   }
 
-
   //rate app
   void showRatingDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) {
-
         return AlertDialog(
           title: const Center(
             child: Text(
@@ -118,7 +105,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 ),
                 onRatingUpdate: (rating) async {
                   // Handle the rating and open the Google Play Store
-                  final playStoreUrl = 'YOUR_GOOGLE_PLAY_STORE_LINK'; // Replace with your app's Play Store URL
+                  final playStoreUrl =
+                      'YOUR_GOOGLE_PLAY_STORE_LINK'; // Replace with your app's Play Store URL
                   if (rating >= 4.0) {
                     if (await canLaunch(playStoreUrl)) {
                       await launch(playStoreUrl);
@@ -144,14 +132,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     );
   }
 
-
-
-
-
-
   // Function to open more apps in the Play Store
   void openMoreApps() async {
-    const playStoreUrl = 'https://play.google.com/store/apps/developer?id=Your+Developer+Name';
+    const playStoreUrl =
+        'https://play.google.com/store/apps/developer?id=Your+Developer+Name';
 
     if (await canLaunch(playStoreUrl)) {
       await launch(playStoreUrl);
@@ -159,9 +143,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       throw 'Could not launch $playStoreUrl';
     }
   }
-
-
-
 
   // Function to share the app
   void shareApp(BuildContext context) {
@@ -172,7 +153,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ListTile(
-              leading: const Icon(Icons.textsms,
+              leading: const Icon(
+                Icons.textsms,
                 color: Colors.blueGrey, // Gmail icon with red color
               ),
               title: const Text('Share via SMS'),
@@ -188,7 +170,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ),
               title: const Text('Share via Email'),
               onTap: () {
-                Share.share('Check out my awesome app: YOUR_APP_NAME via Email');
+                Share.share(
+                    'Check out my awesome app: YOUR_APP_NAME via Email');
                 Navigator.of(context).pop(); // Close the modal sheet
               },
             ),
@@ -270,20 +253,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               },
             ),
 
-
             // Add more sharing options as needed
           ],
         );
       },
     );
   }
-
-
-
-
-
-
-
 
   // Function to provide feedback
   void showFeedbackDialog(BuildContext context) {
@@ -295,7 +270,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             children: [
               Text("Your Valuable Feedback "),
               Icon(
-                Icons.sentiment_satisfied, // Add a smiley emoji or any other icon here
+                Icons
+                    .sentiment_satisfied, // Add a smiley emoji or any other icon here
                 color: Colors.green, // Customize the icon color
               ),
             ],
@@ -315,8 +291,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               const SizedBox(height: 10),
               TextButton(
                 onPressed: () async {
-                  const email = 'your@email.com'; // Replace with your feedback email
-                  const subject = 'Feedback for YOUR_APP_NAME'; // Replace with your app's name
+                  const email =
+                      'your@email.com'; // Replace with your feedback email
+                  const subject =
+                      'Feedback for YOUR_APP_NAME'; // Replace with your app's name
 
                   final url = 'mailto:$email?subject=$subject';
                   if (await canLaunch(url)) {
@@ -342,16 +320,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       },
     );
   }
-
-
-
-
-
-
-
-
-
-
 
   // Function to open the privacy policy
   void openPrivacyPolicyDialog(BuildContext context) {
@@ -410,31 +378,36 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                leading: Icon(Icons.camera_alt_outlined,color: Colors.blueGrey,),
+                leading: Icon(
+                  Icons.camera_alt_outlined,
+                  color: Colors.blueGrey,
+                ),
                 title: Text('Take a Picture'),
                 onTap: () async {
                   final pickedFile =
-                  await picker.pickImage(source: ImageSource.camera);
-                  Navigator.of(context).pop(pickedFile != null
-                      ? File(pickedFile.path)
-                      : null);
+                      await picker.pickImage(source: ImageSource.camera);
+                  Navigator.of(context)
+                      .pop(pickedFile != null ? File(pickedFile.path) : null);
                 },
               ),
               ListTile(
-                leading: Icon(Icons.image,
-                  color: Colors.grey,),
+                leading: Icon(
+                  Icons.image,
+                  color: Colors.grey,
+                ),
                 title: Text('Select from Gallery'),
                 onTap: () async {
                   final pickedFile =
-                  await picker.pickImage(source: ImageSource.gallery);
-                  Navigator.of(context).pop(pickedFile != null
-                      ? File(pickedFile.path)
-                      : null);
+                      await picker.pickImage(source: ImageSource.gallery);
+                  Navigator.of(context)
+                      .pop(pickedFile != null ? File(pickedFile.path) : null);
                 },
               ),
               ListTile(
-                leading: Icon(Icons.cancel,
-                  color: Colors.redAccent,),
+                leading: Icon(
+                  Icons.cancel,
+                  color: Colors.redAccent,
+                ),
                 title: Text('Remove Current Picture'),
                 onTap: () {
                   Navigator.of(context).pop(null);
@@ -453,8 +426,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     }
   }
 
-
-
   // Function to check for updates
   void checkForUpdates(BuildContext context) {
     showDialog(
@@ -466,30 +437,28 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             'Upgrade Now!',
             style: TextStyle(color: Colors.red),
           ),
-          content: const Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
+          content:
+              const Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+            Text(
+              'No other upgrades available for Nventify ',
+              style: TextStyle(color: Colors.black),
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.sentiment_satisfied,
+                  color: Colors.green,
+                  size: 30,
+                ),
                 Text(
-                  'No other upgrades available for Nventify ',
-                  style: TextStyle(color: Colors.black),
+                  ' 😊',
+                  style: TextStyle(fontSize: 24),
                 ),
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.sentiment_satisfied,
-                      color: Colors.green,
-                      size: 30,
-                    ),
-                    Text(
-                      ' 😊',
-                      style: TextStyle(fontSize: 24),
-                    ),
-                  ],
-                ),
-              ]
-          ),
+              ],
+            ),
+          ]),
           actions: <Widget>[
             TextButton(
               onPressed: () {
@@ -503,8 +472,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     );
   }
 
-
-
   // Function to profilesearch
   void profilesearch(BuildContext context) {
     showModalBottomSheet(
@@ -516,7 +483,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             ListTile(
               leading: const Icon(Icons.near_me_outlined,
                   color: Color(0xFF00BF63) // Gmail icon with red color
-              ),
+                  ),
               title: const Text('🙎‍♀️‍♂  Amanda sewwandi'),
               onTap: () {
                 Share.share('Check out my awesome app: YOUR_APP_NAME via SMS');
@@ -579,9 +546,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               },
             ),
 
-
-
-
             ListTile(
               leading: const Icon(
                 Icons.near_me_outlined,
@@ -611,23 +575,18 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     );
   }
 
-
-
-
   // Function to chat
   void chat(BuildContext context) {
     showModalBottomSheet(
       context: context,
-
       builder: (BuildContext context) {
-
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ListTile(
               leading: const Icon(Icons.add_circle,
                   color: Color(0xFF00BF63) // Gmail icon with red color
-              ),
+                  ),
               title: const Text('🙎‍♀️‍ Amanda sewuwanndi  '),
               onTap: () {
                 Share.share('Check out my awesome app: YOUR_APP_NAME via SMS');
@@ -690,9 +649,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               },
             ),
 
-
-
-
             ListTile(
               leading: const Icon(
                 Icons.add_circle,
@@ -718,23 +674,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             // Add more sharing options as needed
           ],
         );
-
       },
     );
   }
 
-
-
-
-
-
-
-
-
-
-
   //for tab bar 1
-
 
   void disply(BuildContext context) {
     showModalBottomSheet(
@@ -758,7 +702,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       },
     );
   }
-
 
 //for tab 2
   void dis(BuildContext context) {
@@ -784,64 +727,41 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     );
   }
 
-
-
-
-
-
-
-
   final AuthServices _auth = AuthServices();
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         key: _scaffoldKey, // Add this line to assign the GlobalKey
         appBar: AppBar(
           backgroundColor: Colors.white,
           actions: [
-
-
-           // Add a Flexible widget to allow the search bar to expand
+            // Add a Flexible widget to allow the search bar to expand
             Flexible(
               child: Visibility(
-
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: TextField( // Search icon color, set to #00BF63
+                  child: TextField(
+                    // Search icon color, set to #00BF63
                     decoration: InputDecoration(
                       hintText: 'Search your friend', // Placeholder text
                       border: InputBorder.none,
                       prefixIcon: GestureDetector(
                         onTap: () {
-                          profilesearch(context); // Call your search function here
+                          profilesearch(
+                              context); // Call your search function here
                         },
                         child: Icon(
                           Icons.search,
-                          color: Color(0xFF00BF63), // Search icon color, set to #00BF63
+                          color: Color(
+                              0xFF00BF63), // Search icon color, set to #00BF63
                         ),
                       ),
-
-
-
-
-
                     ),
                     // Your search bar implementation here
                   ),
                 ),
               ),
             ),
-
-
-
-
-
-
-
-
-
-
 
             const SizedBox(width: 10),
             Container(
@@ -851,11 +771,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 shape: BoxShape.circle,
                 color: Colors.white,
               ),
-
-
-              ),
-            
-
+            ),
 
             const SizedBox(width: 10),
             Container(
@@ -866,295 +782,299 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 border: Border.all(color: Colors.white, width: 2.0),
               ),
               child: IconButton(
-                icon: const Icon(Icons.menu,color: Color(0xFF00BF63)),
+                icon: const Icon(Icons.menu, color: Color(0xFF00BF63)),
                 onPressed: () {
-                  _scaffoldKey.currentState?.openEndDrawer(); // Open the end drawer
+                  _scaffoldKey.currentState
+                      ?.openEndDrawer(); // Open the end drawer
                 },
               ),
             ),
-
           ],
           title: Row(
             children: [
-
               const SizedBox(width: 10),
-
             ],
           ),
         ),
-
-        body: Container(
-          color: Colors.white,
-          child: Column(
-            children: [
-              // First Row
-              Container(
-                color: Colors.white,
-                // Add your content here
-              ),
-              // Second Row
-              Container(
-                width: double.infinity,
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                padding: const EdgeInsets.all(16),
-                child: Container(
+        body: SingleChildScrollView(
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                // First Row
+                Container(
+                  color: Colors.white,
+                  // Add your content here
+                ),
+                // Second Row
+                Container(
                   width: double.infinity,
-                  height: 380,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xFFE5FFEE),
-                  ),
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: IconButton(
-                          icon: Icon(
-                            isEditMode ? Icons.done : Icons.edit,
-                            color: Color(0xFF00BF63),
-                          ),
-                          onPressed: () {
-                            // Handle edit button click
-                            toggleEditMode();
-                          },
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              color: Color(0xFF8D00D4),
-                              borderRadius: BorderRadius.circular(15),
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.all(16),
+                  child: Container(
+                    width: double.infinity,
+                    height: 380,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Color(0xFFE5FFEE),
+                    ),
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: IconButton(
+                            icon: Icon(
+                              isEditMode ? Icons.done : Icons.edit,
+                              color: Color(0xFF00BF63),
                             ),
-                            child: Semantics(
-                              label: 'Photo Profile (1).png', // Set the alt text here
-                              child: GestureDetector(
-                                onTap: _showImagePickerDialog,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: _selectedImage != null
-                                      ? Image.file(_selectedImage!, fit: BoxFit.cover)
-                                      : Image.asset('assets/profile.png', fit: BoxFit.cover),
+                            onPressed: () {
+                              // Handle edit button click
+                              toggleEditMode();
+                            },
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 100,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                color: Color(0xFF8D00D4),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Semantics(
+                                label:
+                                    'Photo Profile (1).png', // Set the alt text here
+                                child: GestureDetector(
+                                  onTap: _showImagePickerDialog,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: _selectedImage != null
+                                        ? Image.file(_selectedImage!,
+                                            fit: BoxFit.cover)
+                                        : Image.asset('assets/profile.png',
+                                            fit: BoxFit.cover),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-
-                          const SizedBox(height: 8),
-                          isEditMode
-                              ? TextFormField(
-                            initialValue: name,
-                            onChanged: (value) {
-                              setState(() {
-                                name = value;
-                              });
-                            },
-                            decoration: const InputDecoration(
-                              labelText: 'Name',
-                            ),
-                          )
-                              : Text(
-                            name,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 16),
-                          ),
-                          isEditMode
-                              ? TextFormField(
-                            initialValue: focVersion,
-                            onChanged: (value) {
-                              setState(() {
-                                focVersion = value;
-                              });
-                            },
-                            decoration: const InputDecoration(
-                              labelText: 'focVersion',
-                            ),
-                          )
-                              : Column(
-                            children: [
-                              Text(
-                                focVersion,
-                                style: const TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.black38),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 16.0),
-                            ],
-                          ),
-                          if (isEditMode)
-                            TextFormField(
-                              initialValue: bio,
-                              onChanged: (value) {
-                                setState(() {
-                                  bio = value;
-                                });
-                              },
-                              decoration: const InputDecoration(
-                                labelText: 'bio',
-                              ),
-                            )
-                          else
-                            Text(
-                              bio,
-                              style: const TextStyle(
-                                  fontSize: 15, color: Colors.black38),
-                              textAlign: TextAlign.center,
-                            ),
-                          const SizedBox(height: 25),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Column(
-                                children: [
-                                  Text(
-                                    followersCount.toString(),
+                            const SizedBox(height: 8),
+                            isEditMode
+                                ? TextFormField(
+                                    initialValue: name,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        name = value;
+                                      });
+                                    },
+                                    decoration: const InputDecoration(
+                                      labelText: 'Name',
+                                    ),
+                                  )
+                                : Text(
+                                    name,
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.black),
+                                        color: Colors.black,
+                                        fontSize: 16),
                                   ),
-                                  const Text(
-                                    'FOLLOWERS',
-                                    style: TextStyle(color: Colors.black38),
+                            isEditMode
+                                ? TextFormField(
+                                    initialValue: focVersion,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        focVersion = value;
+                                      });
+                                    },
+                                    decoration: const InputDecoration(
+                                      labelText: 'focVersion',
+                                    ),
+                                  )
+                                : Column(
+                                    children: [
+                                      Text(
+                                        focVersion,
+                                        style: const TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.black38),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      const SizedBox(height: 16.0),
+                                    ],
                                   ),
-                                ],
+                            if (isEditMode)
+                              TextFormField(
+                                initialValue: bio,
+                                onChanged: (value) {
+                                  setState(() {
+                                    bio = value;
+                                  });
+                                },
+                                decoration: const InputDecoration(
+                                  labelText: 'bio',
+                                ),
+                              )
+                            else
+                              Text(
+                                bio,
+                                style: const TextStyle(
+                                    fontSize: 15, color: Colors.black38),
+                                textAlign: TextAlign.center,
                               ),
-                              const Text('|'),
-                              const Column(
-                                children: [
-                                  Text(
-                                    '35',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
+                            const SizedBox(height: 25),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Column(
+                                  children: [
+                                    Text(
+                                      followersCount.toString(),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
+                                    const Text(
+                                      'FOLLOWERS',
+                                      style: TextStyle(color: Colors.black38),
+                                    ),
+                                  ],
+                                ),
+                                const Text('|'),
+                                const Column(
+                                  children: [
+                                    Text(
+                                      '35',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
+                                    Text(
+                                      'FOLLOWING',
+                                      style: TextStyle(color: Colors.black38),
+                                    ),
+                                  ],
+                                ),
+                                ElevatedButton(
+                                  onPressed: toggleFollow,
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Color(0xFF00BF63),
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                      side: const BorderSide(
+                                        color: Colors.greenAccent,
+                                        width: 2,
+                                      ),
+                                    ),
                                   ),
-                                  Text(
-                                    'FOLLOWING',
-                                    style: TextStyle(color: Colors.black38),
-                                  ),
-                                ],
-                              ),
-                              ElevatedButton(
-                                onPressed: toggleFollow,
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:Color(0xFF00BF63),
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    side: const BorderSide(
-                                      color: Colors.greenAccent,
-                                      width: 2,
+                                  child: Text(
+                                    isFollowed ? 'FOLLOWED' : 'FOLLOW',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ),
-                                child: Text(
-                                  isFollowed ? 'FOLLOWED' : 'FOLLOW',
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              // Third Row - Increment Button and Profile Picture Icons
-              Container(
-                padding: const EdgeInsets.all(16),
-                color: Colors.white,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(16),
-                      color: Colors.white,
-                      child: Row(
+                // Third Row - Increment Button and Profile Picture Icons
+                Container(
+                    padding: const EdgeInsets.all(16),
+                    color: Colors.white,
+                    child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Color(0xFF00BF63), // Set your desired background color
-                              borderRadius: BorderRadius.circular(16), // Makes it a rounded square
+                            padding: const EdgeInsets.all(16),
+                            color: Colors.white,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: Color(
+                                        0xFF00BF63), // Set your desired background color
+                                    borderRadius: BorderRadius.circular(
+                                        16), // Makes it a rounded square
+                                  ),
+                                  child: IconButton(
+                                    icon: const Icon(Icons.add_circle,
+                                        color: Colors.white),
+                                    onPressed: () {
+                                      chat(context);
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: Color(
+                                        0xFF00BF63), // Set your desired background color
+                                    borderRadius: BorderRadius.circular(
+                                        16), // Makes it a rounded square
+                                  ),
+                                  child: IconButton(
+                                    icon:
+                                        Image.asset('assets/Photo Profile.png'),
+                                    onPressed: () {
+                                      // Add your onPressed logic for the second button here
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: Color(
+                                        0xFF00BF63), // Set your desired background color
+                                    borderRadius: BorderRadius.circular(
+                                        16), // Makes it a rounded square
+                                  ),
+                                  child: IconButton(
+                                    icon: Image.asset(
+                                        'assets/Photo Profile (1).png'), // Replace with your asset path
+                                    //icon: const Icon(Icons.add, color: Colors.white),
+                                    onPressed: () {
+                                      // Add your onPressed logic for the second button here
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: Color(
+                                        0xFF00BF63), // Set your desired background color
+                                    borderRadius: BorderRadius.circular(
+                                        16), // Makes it a rounded square
+                                  ),
+                                  child: IconButton(
+                                    icon: Image.asset(
+                                        'assets/Photo Profile (2).png'),
+                                    onPressed: () {
+                                      // Add your onPressed logic for the second button here
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
-                            child: IconButton(
-                              icon: const Icon(Icons.add_circle, color: Colors.white),
-                              onPressed: () {
-                                chat(context);
-                              },
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Color(0xFF00BF63), // Set your desired background color
-                              borderRadius: BorderRadius.circular(16), // Makes it a rounded square
-                            ),
-                            child: IconButton(
-                              icon: Image.asset('assets/Photo Profile.png'),
-                              onPressed: () {
-                                // Add your onPressed logic for the second button here
-                              },
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Color(0xFF00BF63), // Set your desired background color
-                              borderRadius: BorderRadius.circular(16), // Makes it a rounded square
-                            ),
-                            child: IconButton(
-                              icon: Image.asset('assets/Photo Profile (1).png'), // Replace with your asset path
-                              //icon: const Icon(Icons.add, color: Colors.white),
-                              onPressed: () {
-                                // Add your onPressed logic for the second button here
-                              },
-                            ),
-                          ),
-
-                          const SizedBox(width: 10),
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Color(0xFF00BF63), // Set your desired background color
-                              borderRadius: BorderRadius.circular(16), // Makes it a rounded square
-                            ),
-                            child: IconButton(
-                              icon: Image.asset('assets/Photo Profile (2).png'),
-                              onPressed: () {
-                                // Add your onPressed logic for the second button here
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-
-
-
-
-
-                  ]
-                )
-              ),
-              // Fourth Row (Scrollable Icons)
-              Container(
+                          )
+                        ])),
+                // Fourth Row (Scrollable Icons)
+                Container(
                   padding: const EdgeInsets.all(50),
                   color: Colors.white,
                   child: Row(
@@ -1164,27 +1084,33 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         width: 150,
                         height: 20,
                         decoration: BoxDecoration(
-                          color: Color(0xFFe7fdf1),  // Set your desired background color
-                          borderRadius: BorderRadius.circular(8), // Makes it a rounded square
+                          color: Color(
+                              0xFFe7fdf1), // Set your desired background color
+                          borderRadius: BorderRadius.circular(
+                              8), // Makes it a rounded square
                         ),
                         child: IconButton(
-                          icon: const Icon(Icons.event, color: Color(0xFF00BF63)),
+                          icon:
+                              const Icon(Icons.event, color: Color(0xFF00BF63)),
                           onPressed: () {
-                            disply(context) ;// Add your onPressed logic for the first button here
+                            disply(
+                                context); // Add your onPressed logic for the first button here
                           },
                         ),
                       ),
-
                       const SizedBox(width: 10),
                       Container(
                         width: 150,
                         height: 20,
                         decoration: BoxDecoration(
-                          color: Color(0xFFe7fdf1),  // Set your desired background color
-                          borderRadius: BorderRadius.circular(8), // Makes it a rounded square
+                          color: Color(
+                              0xFFe7fdf1), // Set your desired background color
+                          borderRadius: BorderRadius.circular(
+                              8), // Makes it a rounded square
                         ),
                         child: IconButton(
-                          icon: const Icon(Icons.event_note_outlined, color: Color(0xFF00BF63)),
+                          icon: const Icon(Icons.event_note_outlined,
+                              color: Color(0xFF00BF63)),
                           onPressed: () {
                             dis(context); // Add your onPressed logic for the second button here
                           },
@@ -1192,20 +1118,11 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       ),
                     ],
                   ),
-              ),
-
-
-
-
-
-
-
-
-            ],
+                ),
+              ],
+            ),
           ),
-
         ),
-
         endDrawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
@@ -1231,7 +1148,6 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
               // Menu items
 
-
               ListTile(
                 leading: const Icon(
                   Icons.star,
@@ -1243,24 +1159,21 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 },
               ),
 
-
               ListTile(
-                leading: const Icon(Icons.apps,
-                  color: Colors.brown,),
+                leading: const Icon(
+                  Icons.apps,
+                  color: Colors.brown,
+                ),
                 title: const Text("More Apps (Ad)"),
                 onTap: openMoreApps,
               ),
               ListTile(
-                leading: const Icon(Icons.share,
-                    color: Colors.lightGreen
-                ),
+                leading: const Icon(Icons.share, color: Colors.lightGreen),
                 title: const Text("Share"),
                 onTap: () {
                   shareApp(context); // Pass the BuildContext to the function
                 },
               ),
-
-
 
               ListTile(
                 leading: const Icon(
@@ -1275,19 +1188,20 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
 // Add the "Privacy Policy" ListTile in the Drawer
               ListTile(
-                leading: const Icon(Icons.policy,
-                  color: Colors.black26,),
+                leading: const Icon(
+                  Icons.policy,
+                  color: Colors.black26,
+                ),
                 title: const Text("Privacy Policy"),
                 onTap: () {
-                  openPrivacyPolicyDialog(context); // Open the privacy policy dialog
+                  openPrivacyPolicyDialog(
+                      context); // Open the privacy policy dialog
                 },
               ),
 
-
-
               ListTile(
-                leading: const Icon(Icons.system_update,
-                  color: Colors.blueGrey),
+                leading:
+                    const Icon(Icons.system_update, color: Colors.blueGrey),
                 title: const Text("Check For Updates"),
                 onTap: () {
                   checkForUpdates(context);
@@ -1295,71 +1209,23 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               ),
 
               ListTile(
-                leading: const Icon(Icons.logout,
-                  color: Colors.blue),
+                leading: const Icon(Icons.logout, color: Colors.blue),
                 title: const Text("Logout"),
                 onTap: () async {
                   Navigator.pop(context); // Close the Drawer
-                  Navigator.push(context, MaterialPageRoute(builder: (context){return const Login_SignUp();},),);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const Login_SignUp();
+                      },
+                    ),
+                  );
                   await widget._auth.signOut(); // Sign out the user
-
                 },
               ),
-
-
-
-
-
-
-
-
-
-
-
             ],
           ),
-          )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        ));
   }
 }
